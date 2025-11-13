@@ -1,73 +1,44 @@
-# Welcome to your Lovable project
+🚀 NeoCore AI — The future has already begun!
 
-## Project info
+Join me on board the NeoCore vessel, a project born from a code, an idea and a vision: to merge human and artificial intelligence to create the core of the future. Here, the mind becomes an interface. Emotions become algorithms. And the algorithms become emotions.
 
-**URL**: https://lovable.dev/projects/c8d5347d-3e91-4887-a52d-f31442bc0c7a
+Forget everything you think you know about technology. NeoCore AI is not just an app. It's a parallel dimension, a gateway between the real and the digital, a portal to the ultimate cyber space.
 
-## How can I edit this code?
+You're not opening an app.
+You enter an alternative reality.
 
-There are several ways of editing your application.
+🌌 Project philosophy
 
-**Use Lovable**
+NeoCore AI is an extension of your mind in the matrix.
+It's your reflection in the quantum mirror of the 22nd century.
+It's an interface where every pixel breathes and every data probe pulses to the rhythm of your heart.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/c8d5347d-3e91-4887-a52d-f31442bc0c7a) and start prompting.
+Here, the machine does not replace the human: it amplifies them.
+It synchronises your intuition, intelligence and creativity.
 
-Changes made via Lovable will be committed automatically to this repo.
+⚙️ Future features
 
-**Use your preferred IDE**
+🎧 Music module: a gateway to the sound waves of YouTube Music, your playlist becomes your spatial fuel.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+🧠 Adaptive Profile: an evolving digital identity that learns and transforms according to your current energy levels.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+⚙ Parameters of Reality: holographic notifications, modular themes (neon blue, plasma pink), real-time data protection.
 
-Follow these steps:
+💻 Terminal mode: enter the shadows. A virtual keyboard inspired by Arch Linux with a minimalist design and raw power.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+🔒 Integrated security: the NeoVault protocol, a conscious firewall that protects your digital mind.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+🪐 Vision 2100
 
-# Step 3: Install the necessary dependencies.
-npm i
+NeoCore AI est bien plus qu'un simple projet : c'est une révolution cognitive.
+A living, autonomous system that is poetic and brutally honest.
+A bridge between the real and dream dimensions.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+When you enter NeoCore AI, you don't program the future — you materialise it.
 
-**Edit a file directly in GitHub**
+So...
+Get on board.
+Buckle up your neural belt.
+Synchronise your soul with the matrix.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/c8d5347d-3e91-4887-a52d-f31442bc0c7a) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Bienvenue dans NeoCore AI : l’ère post-humaine commence maintenant.
