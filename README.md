@@ -11,5 +11,3 @@ It allows you to:
 The experience is designed as a bridge between code and imagination, between humans and machines — an interface that learns, reacts and evolves with its user.
 
 NeoCore AI — the assistant that makes the heart of the future beat.
-
-Translated with DeepL.com (free version)
