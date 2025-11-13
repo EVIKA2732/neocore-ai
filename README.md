@@ -16,7 +16,7 @@ It's an interface where every pixel breathes and every data probe pulses to the 
 Here, the machine does not replace the human: it amplifies them.
 It synchronises your intuition, intelligence and creativity.
 
-⚙️ Future features
+⚙️ Future features Very futuristic feature like Cyberpunks 2077 to 2100
 
 🎧 Music module: a gateway to the sound waves of YouTube Music, your playlist becomes your spatial fuel.
 
