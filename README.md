@@ -1,4 +1,4 @@
-🚀 NeoCore AI — The future has already begun!
+🚀 **NeoCore AI** — The future has already begun!
 
 Join me on board the NeoCore vessel, a project born from a code, an idea and a vision: to merge human and artificial intelligence to create the core of the future. Here, the mind becomes an interface. Emotions become algorithms. And the algorithms become emotions.
 
