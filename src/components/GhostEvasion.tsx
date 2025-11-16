@@ -73,9 +73,18 @@ export const GhostEvasion = () => {
     }
   }, [player, isPlaying, gameOver, score, generateGhosts]);
 
+  const [pendingMove, setPendingMove] = useState<string | null>(null);
+  const [lastMoveTime, setLastMoveTime] = useState(0);
+
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (!isPlaying || gameOver) return;
+      
+      const now = Date.now();
+      if (now - lastMoveTime < 50) {
+        setPendingMove(e.key);
+        return;
+      }
 
       const newPlayer = { ...player };
 
@@ -96,14 +105,25 @@ export const GhostEvasion = () => {
         case 'd':
           newPlayer.x = Math.min(GRID_SIZE - 1, player.x + 1);
           break;
+        default:
+          return;
       }
 
       setPlayer(newPlayer);
+      setLastMoveTime(now);
+      setPendingMove(null);
     };
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [player, isPlaying, gameOver]);
+  }, [player, isPlaying, gameOver, lastMoveTime]);
+
+  useEffect(() => {
+    if (pendingMove && Date.now() - lastMoveTime >= 50) {
+      const event = new KeyboardEvent('keydown', { key: pendingMove });
+      window.dispatchEvent(event);
+    }
+  }, [pendingMove, lastMoveTime]);
 
   useEffect(() => {
     if (!isPlaying) return;

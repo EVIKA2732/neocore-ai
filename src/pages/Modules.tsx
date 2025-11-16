@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { CyberCard } from "@/components/CyberCard";
-import { Music, FileText, MessageSquare, Terminal, Gamepad2, MessagesSquare, Calendar as CalendarIcon, BookOpen } from "lucide-react";
+import { Music, FileText, MessageSquare, Terminal, Gamepad2, MessagesSquare, Calendar as CalendarIcon, BookOpen, Globe, Swords, Activity, Clock } from "lucide-react";
 
 const Modules = () => {
   const navigate = useNavigate();
@@ -15,6 +15,10 @@ const Modules = () => {
     { icon: MessagesSquare, title: "CyberTalk", description: "Chat sécurisé", onClick: () => navigate("/cybertalk") },
     { icon: CalendarIcon, title: "Calendrier", description: "Navigation temporelle", onClick: () => navigate("/calendar") },
     { icon: BookOpen, title: "Neopedia", description: "Encyclopédie du futur", onClick: () => navigate("/neopedia") },
+    { icon: Globe, title: "Horloges Planétaires", description: "Temps multi-mondes", onClick: () => navigate("/clocks") },
+    { icon: Swords, title: "Chess of Space", description: "Échecs quantiques", onClick: () => navigate("/chess") },
+    { icon: Activity, title: "Nanomédecine", description: "Thérapies du futur", onClick: () => navigate("/nanomedicine") },
+    { icon: Clock, title: "Voyage Temporel", description: "Exploration 2025-2110", onClick: () => navigate("/timetravel") },
   ];
 
   return (

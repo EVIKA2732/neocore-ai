@@ -9,6 +9,7 @@ interface CyberButtonProps {
   icon?: LucideIcon;
   className?: string;
   fullWidth?: boolean;
+  disabled?: boolean;
 }
 
 export const CyberButton = ({ 
@@ -17,7 +18,8 @@ export const CyberButton = ({
   variant = "primary", 
   icon: Icon,
   className,
-  fullWidth 
+  fullWidth,
+  disabled 
 }: CyberButtonProps) => {
   const variants = {
     primary: "bg-primary/20 text-primary border-2 border-primary hover:bg-primary hover:text-primary-foreground neon-glow transition-all duration-300",
@@ -29,10 +31,12 @@ export const CyberButton = ({
   return (
     <Button
       onClick={onClick}
+      disabled={disabled}
       className={cn(
         variants[variant],
         "font-orbitron font-bold uppercase tracking-wider",
         fullWidth && "w-full",
+        disabled && "opacity-50 cursor-not-allowed",
         className
       )}
     >

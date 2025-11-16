@@ -18,6 +18,10 @@ import Games from "./pages/Games";
 import CyberTalk from "./pages/CyberTalk";
 import Calendar from "./pages/Calendar";
 import Neopedia from "./pages/Neopedia";
+import PlanetaryClocks from "./pages/PlanetaryClocks";
+import ChessSpace from "./pages/ChessSpace";
+import Nanomedicine from "./pages/Nanomedicine";
+import TimeTravel from "./pages/TimeTravel";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -52,6 +56,10 @@ const App = () => {
                   <Route path="/cybertalk" element={<CyberTalk />} />
                   <Route path="/calendar" element={<Calendar />} />
                   <Route path="/neopedia" element={<Neopedia />} />
+                  <Route path="/clocks" element={<PlanetaryClocks />} />
+                  <Route path="/chess" element={<ChessSpace />} />
+                  <Route path="/nanomedicine" element={<Nanomedicine />} />
+                  <Route path="/timetravel" element={<TimeTravel />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/settings" element={<SettingsPage />} />
                   <Route path="*" element={<NotFound />} />

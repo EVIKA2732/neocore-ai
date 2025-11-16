@@ -20,11 +20,21 @@ export const SnakeGame = () => {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
 
-  const generateFood = useCallback(() => {
-    const newFood = {
-      x: Math.floor(Math.random() * GRID_SIZE),
-      y: Math.floor(Math.random() * GRID_SIZE),
-    };
+  const generateFood = useCallback((currentSnake: Position[]) => {
+    let newFood: Position;
+    let attempts = 0;
+    
+    do {
+      newFood = {
+        x: Math.floor(Math.random() * GRID_SIZE),
+        y: Math.floor(Math.random() * GRID_SIZE),
+      };
+      attempts++;
+    } while (
+      attempts < 100 &&
+      currentSnake.some(segment => segment.x === newFood.x && segment.y === newFood.y)
+    );
+    
     setFood(newFood);
   }, []);
 
@@ -33,7 +43,7 @@ export const SnakeGame = () => {
     setDirection(INITIAL_DIRECTION);
     setScore(0);
     setGameOver(false);
-    generateFood();
+    generateFood(INITIAL_SNAKE);
   };
 
   const checkCollision = (head: Position) => {
@@ -74,7 +84,7 @@ export const SnakeGame = () => {
 
       if (head.x === food.x && head.y === food.y) {
         setScore(prev => prev + 10);
-        generateFood();
+        generateFood(newSnake);
       } else {
         newSnake.pop();
       }
