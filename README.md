@@ -1,3 +1,5 @@
+🔸🔸Second update
+
 
 🚀 **NEOCORE AI** – *Intergalactic Update* 🌌
 
@@ -71,27 +73,25 @@ Synchronise your soul with the matrix.
 
 Welcome to NeoCore AI: the post-human era begins now.
 
-
-                                              🔸 Added/improved features
+____________________________________________________________________________________________________________________________
+              🔸 First update                               🔸 Added/improved features
 
 *I then enhanced and expanded NEOCORE AI with a set of major improvements*
 
+✨ **NEOCORE AI** – *Cyberpunk Update*
 
+🎨 Customisable themes: blue 🔵, pink 🌸, green 🟢, orange 🟧, purple 💜
 
-✨ NEOCORE AI – Mise à jour Cyberpunk
+🌌 Lively animation: animated background bringing AI to life with holographic effects and pulsating lights
 
-🎨 Thèmes personnalisables : bleu 🔵, rose 🌸, vert 🟢, orange 🟧, violet 💜
+💻 Futuristic terminal: predictions, scanlines and dynamic visual feedback
 
-🌌 Animation vivante : fond animé donnant vie à l’IA avec effets holographiques et pulsations lumineuses
+💬 Cyberpunk chat: secure chat with anyone via link, Matrix/Signal style 👽
 
-💻 Terminal futuriste : prédictions, scanlines et feedback visuel dynamique
+🕹️ Built-in mini-games: Snake Cyberpunk Edition 🐍 and Escape Ghost Protocol 👻
 
-💬 Chat cyberpunk : discussion sécurisée avec n’importe qui via lien, style Matrix/Signal 👽
+🗺️ Calendar, maps and clocks: terrestrial and intergalactic immersion
 
-🕹️ Mini-jeux intégrés : Snake Cyberpunk Edition 🐍 et Escape Ghost Protocol 👻
+📚 NeoPedia AI: mini-wiki of the future with advanced technologies and interstellar ships
 
-🗺️ Calendrier, cartes et horloges : immersion terrestre et intergalactique
-
-📚 NeoPedia AI : mini-wiki du futur avec technologies avancées et vaisseaux interstellaires
-
-➡️ NEOCORE AI devient une plateforme cyberpunk complète : personnalisation, animations, jeux, chat et exploration du futur.
+➡️ NEOCORE AI becomes a complete cyberpunk platform: customisation, animations, games, chat and exploration of the future.
