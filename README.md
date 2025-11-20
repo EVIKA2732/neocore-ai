@@ -1,6 +1,41 @@
-<<<<<<< HEAD
-# Welcome to your Lovable project
-=======
+
+🚀 NEOCORE AI – Version [2.8.6] – Mise à jour majeure
+
+✨ Sécurité & légalité renforcées
+
+L’IA ne donne plus jamais de conseils médicaux ou juridiques.
+
+Toutes les professions réglementées sont désormais strictement exclues de la génération de réponses.
+
+Chaque réponse affiche un message automatique :
+
+⚠️ Contenu spéculatif, éducatif et non destiné à un usage médical ou juridique.
+
+🔘 Nouveau bouton RGTD
+
+Conformité totale au droit européen.
+
+Permet à chaque utilisateur de gérer ses données facilement.
+
+♟️ Jeu d’échecs amélioré
+
+Respect scrupuleux des règles classiques du jeu d’échecs.
+
+Plus possible de déplacer les pièces n’importe comment.
+
+🗑️ Suppression rapide des données
+
+Un bouton dédié permet de supprimer instantanément toutes vos données personnelles stockées.
+
+💡 Améliorations générales
+
+Interface plus fluide et intuitive.
+
+Corrections mineures sur les mini-jeux et les modules interactifs.
+
+💜 Résumé : NEOCORE AI devient encore plus sûr, responsable et respectueux des lois, tout en restant un hub futuriste, interactif et ludique.
+
+______________________________________________________________________________________________________________________________________________
 🔸🔸*Second update*
 
 
