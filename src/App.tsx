@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { SplashScreen } from "./components/SplashScreen";
 import { Navigation } from "./components/Navigation";
+import { LegalFooter } from "./components/LegalFooter";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Modules from "./pages/Modules";
@@ -65,6 +66,7 @@ const App = () => {
                   <Route path="*" element={<NotFound />} />
                 </Routes>
                 <Navigation />
+                <LegalFooter />
               </div>
             </BrowserRouter>
           )}

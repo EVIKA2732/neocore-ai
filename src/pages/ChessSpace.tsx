@@ -74,6 +74,66 @@ const ChessSpace = () => {
     toast.success("Nouvelle partie initialisée", { className: "neon-glow" });
   };
 
+  const isValidMove = (fromRow: number, fromCol: number, toRow: number, toCol: number, piece: Piece): boolean => {
+    const rowDiff = Math.abs(toRow - fromRow);
+    const colDiff = Math.abs(toCol - fromCol);
+    const targetPiece = board[toRow][toCol];
+    
+    // Ne peut pas capturer sa propre pièce
+    if (targetPiece && targetPiece.color === piece.color) return false;
+    
+    switch (piece.type) {
+      case 'pawn':
+        const direction = piece.color === 'white' ? -1 : 1;
+        const startRow = piece.color === 'white' ? 6 : 1;
+        
+        // Avancer d'une case
+        if (colDiff === 0 && toRow === fromRow + direction && !targetPiece) return true;
+        
+        // Avancer de deux cases depuis position initiale
+        if (colDiff === 0 && fromRow === startRow && toRow === fromRow + 2 * direction && !targetPiece && !board[fromRow + direction][fromCol]) return true;
+        
+        // Capturer en diagonale
+        if (colDiff === 1 && toRow === fromRow + direction && targetPiece) return true;
+        
+        return false;
+        
+      case 'rook':
+        return (rowDiff === 0 || colDiff === 0) && isPathClear(fromRow, fromCol, toRow, toCol);
+        
+      case 'knight':
+        return (rowDiff === 2 && colDiff === 1) || (rowDiff === 1 && colDiff === 2);
+        
+      case 'bishop':
+        return rowDiff === colDiff && isPathClear(fromRow, fromCol, toRow, toCol);
+        
+      case 'queen':
+        return (rowDiff === colDiff || rowDiff === 0 || colDiff === 0) && isPathClear(fromRow, fromCol, toRow, toCol);
+        
+      case 'king':
+        return rowDiff <= 1 && colDiff <= 1;
+        
+      default:
+        return false;
+    }
+  };
+  
+  const isPathClear = (fromRow: number, fromCol: number, toRow: number, toCol: number): boolean => {
+    const rowStep = toRow > fromRow ? 1 : toRow < fromRow ? -1 : 0;
+    const colStep = toCol > fromCol ? 1 : toCol < fromCol ? -1 : 0;
+    
+    let currentRow = fromRow + rowStep;
+    let currentCol = fromCol + colStep;
+    
+    while (currentRow !== toRow || currentCol !== toCol) {
+      if (board[currentRow][currentCol]) return false;
+      currentRow += rowStep;
+      currentCol += colStep;
+    }
+    
+    return true;
+  };
+
   const handleSquareClick = (row: number, col: number) => {
     const piece = board[row][col];
     
@@ -82,6 +142,13 @@ const ChessSpace = () => {
       const fromPiece = board[fromRow][fromCol];
       
       if (fromPiece && fromPiece.color === currentPlayer) {
+        // Validation stricte FIDE
+        if (!isValidMove(fromRow, fromCol, row, col, fromPiece)) {
+          toast.error("Mouvement illégal selon les règles FIDE", { className: "neon-glow" });
+          setSelectedSquare(null);
+          return;
+        }
+        
         const newBoard = board.map(r => [...r]);
         newBoard[row][col] = fromPiece;
         newBoard[fromRow][fromCol] = null;
@@ -93,7 +160,7 @@ const ChessSpace = () => {
         const move = `${String.fromCharCode(97 + fromCol)}${8 - fromRow} → ${String.fromCharCode(97 + col)}${8 - row}`;
         setMoveHistory([...moveHistory, move]);
         
-        toast.success("Coup joué", { className: "neon-glow" });
+        toast.success("Coup joué ✓", { className: "neon-glow" });
       }
     } else if (piece && piece.color === currentPlayer) {
       setSelectedSquare([row, col]);
