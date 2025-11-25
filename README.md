@@ -1,3 +1,19 @@
+🌟 NeoCore AI update — Simple version that everyone can read
+
+I finalised and organised the entire project properly. She added the missing pages, improved the existing modules, and made the whole thing clearer and cleaner. ✨
+
+Then she updated the entire "legal" section to make it better explained and more understandable. ⚖️
+
+Two new modules were also created:
+
+NEOPEDIA 📚: a futuristic encyclopaedia that generates imaginary information from the future.
+
+Medical advances 2030 → 2100 🧬: a simple timeline showing the evolution of medicine, decade by decade.
+
+I also asked the AI to add several "personalities" so that it could respond differently depending on the tone: Cool 😎, Coach 💪, Friend 🤝, or Engineer 🤖 (but explained in a simple way).
+
+Finally, everything was integrated and organised into the application, without it asking me each time if I really wanted it added. Everything is clean, clear, and works together. 🚀
+____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 🚀 NEOCORE AI – Version [2.8.6] – Major update
 
 ✨ Enhanced security and legality
@@ -82,5 +98,3 @@ ___________________________________________________________________________
 📚 NeoPedia AI: mini-wiki of the future with advanced technologies and interstellar ships
 
 ➡️ NEOCORE AI becomes a complete cyberpunk platform: customisation, animations, games, chat and exploration of the future.
-
->>>>>>> d220850c4fbf67ab93702f8c2ca1d1bdd82c377f
