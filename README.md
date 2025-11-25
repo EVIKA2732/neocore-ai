@@ -1,36 +1,4 @@
-<<<<<<< HEAD
 # Welcome to your Lovable project
-=======
-🔸🔸*Second update*
-
-
-🚀 **NEOCORE AI** – *Intergalactic Update* 🌌
-
-Version 2.0 – Future activated
-
-✨ Key new features:
-
-🐍 Improved games: Futuristic Snake and Ghost Evasion fixed and smooth. New games: Space Chess ♟️ and Intergalactic Slither.io 🌠.
-
-💻 Advanced terminal: new commands, user profiles and neural network status.
-
-🕰️ Planetary clocks: time simulator on 5 planets and intergalactic calendar.
-
-🎵 Internal music streaming and YouTube Music integration.
-
-📚 Neopedia AI: enriched and interactive encyclopaedia of the future.
-
-🗺️ Map of the future: interactive exploration of districts, countries and municipalities from 2025 to 2100.
-
-💬 Futuristic chat: chat with other users, AI or aliens 👽, and decode messages from the future.
-
-🕹️ Time travel and immersive interface: interface that evolves according to the era, with videos and photos from the future.
-
-NEOCORE AI is now a complete experience: games, exploration, chat and futuristic technologies directly in your cyberpunk interface ⚡.
-
-___________________________________________________________________________
-🚀 **NeoCore AI** — *The future has already begun!*
->>>>>>> origin/main
 
 ## Project info
 
@@ -76,7 +44,6 @@ npm run dev
 
 **Use GitHub Codespaces**
 
-<<<<<<< HEAD
 - Navigate to the main page of your repository.
 - Click on the "Code" button (green button) near the top right.
 - Select the "Codespaces" tab.
@@ -84,14 +51,9 @@ npm run dev
 - Edit files directly within the Codespace and commit and push your changes once you're done.
 
 ## What technologies are used for this project?
-=======
-____________________________________________________________________________________________________________________________
-              🔸 First update                               🔸 Added/improved features
->>>>>>> origin/main
 
 This project is built with:
 
-<<<<<<< HEAD
 - Vite
 - TypeScript
 - React
@@ -109,22 +71,3 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
-=======
-✨ **NEOCORE AI** – *Cyberpunk Update*
-
-🎨 Customisable themes: blue 🔵, pink 🌸, green 🟢, orange 🟧, purple 💜
-
-🌌 Lively animation: animated background bringing AI to life with holographic effects and pulsating lights
-
-💻 Futuristic terminal: predictions, scanlines and dynamic visual feedback
-
-💬 Cyberpunk chat: secure chat with anyone via link, Matrix/Signal style 👽
-
-🕹️ Built-in mini-games: Snake Cyberpunk Edition 🐍 and Escape Ghost Protocol 👻
-
-🗺️ Calendar, maps and clocks: terrestrial and intergalactic immersion
-
-📚 NeoPedia AI: mini-wiki of the future with advanced technologies and interstellar ships
-
-➡️ NEOCORE AI becomes a complete cyberpunk platform: customisation, animations, games, chat and exploration of the future.
->>>>>>> origin/main

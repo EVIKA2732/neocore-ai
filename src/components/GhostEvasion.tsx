@@ -18,15 +18,15 @@ export const GhostEvasion = () => {
   const [gameOver, setGameOver] = useState(false);
   const [level, setLevel] = useState(1);
 
-  const generateGhosts = useCallback(() => {
+  const generateGhosts = useCallback((count: number = NUM_GHOSTS + level - 1) => {
     const newGhosts: Position[] = [];
-    for (let i = 0; i < NUM_GHOSTS + level - 1; i++) {
+    for (let i = 0; i < count; i++) {
       newGhosts.push({
         x: Math.floor(Math.random() * GRID_SIZE),
         y: Math.floor(Math.random() * GRID_SIZE),
       });
     }
-    setGhosts(newGhosts);
+    return newGhosts;
   }, [level]);
 
   const resetGame = () => {
@@ -34,43 +34,44 @@ export const GhostEvasion = () => {
     setScore(0);
     setLevel(1);
     setGameOver(false);
-    generateGhosts();
+    setGhosts(generateGhosts());
   };
 
   const moveGhosts = useCallback(() => {
     if (!isPlaying || gameOver) return;
 
-    setGhosts(prevGhosts =>
-      prevGhosts.map(ghost => {
+    setGhosts(prevGhosts => {
+      const newGhosts = prevGhosts.map(ghost => {
+        const newGhost = { ...ghost };
         const dx = player.x - ghost.x;
         const dy = player.y - ghost.y;
         
-        const newGhost = { ...ghost };
-        
         if (Math.abs(dx) > Math.abs(dy)) {
           newGhost.x += dx > 0 ? 1 : -1;
-        } else {
+        } else if (Math.abs(dy) > 0) {
           newGhost.y += dy > 0 ? 1 : -1;
         }
 
         newGhost.x = Math.max(0, Math.min(GRID_SIZE - 1, newGhost.x));
         newGhost.y = Math.max(0, Math.min(GRID_SIZE - 1, newGhost.y));
-
-        if (newGhost.x === player.x && newGhost.y === player.y) {
-          setGameOver(true);
-          setIsPlaying(false);
-        }
-
         return newGhost;
-      })
-    );
+      });
 
-    setScore(prev => prev + 1);
-    
-    if (score > 0 && score % 100 === 0) {
-      setLevel(prev => prev + 1);
-      generateGhosts();
-    }
+      if (newGhosts.some(g => g.x === player.x && g.y === player.y)) {
+        setGameOver(true);
+        setIsPlaying(false);
+        return prevGhosts;
+      }
+
+      setScore(prev => prev + 1);
+      
+      if ((score + 1) % 100 === 0) {
+        setLevel(prev => prev + 1);
+        return [...newGhosts, generateGhosts(1)[0]];
+      }
+
+      return newGhosts;
+    });
   }, [player, isPlaying, gameOver, score, generateGhosts]);
 
   const [pendingMove, setPendingMove] = useState<string | null>(null);
@@ -127,14 +128,13 @@ export const GhostEvasion = () => {
 
   useEffect(() => {
     if (!isPlaying) return;
-
     const gameLoop = setInterval(moveGhosts, GAME_SPEED);
     return () => clearInterval(gameLoop);
   }, [isPlaying, moveGhosts]);
 
   useEffect(() => {
-    generateGhosts();
-  }, [generateGhosts]);
+    setGhosts(generateGhosts());
+  }, []);
 
   return (
     <CyberCard className="p-6 space-y-4" glow>
@@ -148,12 +148,8 @@ export const GhostEvasion = () => {
 
       <div 
         className="relative bg-cyber-darker border-2 border-primary/30 mx-auto"
-        style={{ 
-          width: GRID_SIZE * CELL_SIZE, 
-          height: GRID_SIZE * CELL_SIZE 
-        }}
+        style={{ width: GRID_SIZE * CELL_SIZE, height: GRID_SIZE * CELL_SIZE }}
       >
-        {/* Grid */}
         {Array.from({ length: GRID_SIZE }).map((_, i) => (
           <div key={`h-${i}`} className="absolute w-full h-px bg-primary/5" style={{ top: i * CELL_SIZE }} />
         ))}
@@ -161,7 +157,6 @@ export const GhostEvasion = () => {
           <div key={`v-${i}`} className="absolute h-full w-px bg-primary/5" style={{ left: i * CELL_SIZE }} />
         ))}
 
-        {/* Player */}
         <div
           className="absolute bg-primary rounded-full neon-glow-strong transition-all duration-100"
           style={{
@@ -172,7 +167,6 @@ export const GhostEvasion = () => {
           }}
         />
 
-        {/* Ghosts */}
         {ghosts.map((ghost, i) => (
           <div
             key={i}
@@ -186,7 +180,6 @@ export const GhostEvasion = () => {
           />
         ))}
 
-        {/* Game Over */}
         {gameOver && (
           <div className="absolute inset-0 bg-cyber-dark/90 flex items-center justify-center">
             <div className="text-center">
@@ -199,28 +192,14 @@ export const GhostEvasion = () => {
       </div>
 
       <div className="flex gap-3">
-        <CyberButton
-          variant="primary"
-          icon={Play}
-          onClick={() => {
-            if (gameOver) resetGame();
-            setIsPlaying(true);
-          }}
-          fullWidth
-        >
+        <CyberButton variant="primary" icon={Play} onClick={() => { if (gameOver) resetGame(); setIsPlaying(true); }} fullWidth>
           {isPlaying ? 'En cours...' : 'Démarrer'}
         </CyberButton>
-        <CyberButton
-          variant="accent"
-          icon={RotateCcw}
-          onClick={resetGame}
-        >
-          Reset
-        </CyberButton>
+        <CyberButton variant="accent" icon={RotateCcw} onClick={resetGame}>Reset</CyberButton>
       </div>
 
       <p className="text-xs text-muted-foreground text-center">
-        Flèches ou ZQSD pour se déplacer - Évitez les fantômes !
+        Flèches ou ZQSD - Les fantômes vous poursuivent toujours !
       </p>
     </CyberCard>
   );

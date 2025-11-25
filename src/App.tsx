@@ -23,6 +23,13 @@ import PlanetaryClocks from "./pages/PlanetaryClocks";
 import ChessSpace from "./pages/ChessSpace";
 import Nanomedicine from "./pages/Nanomedicine";
 import TimeTravel from "./pages/TimeTravel";
+import MusicPlayer from "./pages/MusicPlayer";
+import LockScreen from "./pages/LockScreen";
+import WallpaperGallery from "./pages/WallpaperGallery";
+import VoiceAssistant from "./pages/VoiceAssistant";
+import EarthEvolution from "./pages/EarthEvolution";
+import NeopediaAI from "./pages/NeopediaAI";
+import MedicalAdvances from "./pages/MedicalAdvances";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -61,6 +68,13 @@ const App = () => {
                   <Route path="/chess" element={<ChessSpace />} />
                   <Route path="/nanomedicine" element={<Nanomedicine />} />
                   <Route path="/timetravel" element={<TimeTravel />} />
+                  <Route path="/music" element={<MusicPlayer />} />
+                  <Route path="/lock" element={<LockScreen />} />
+                  <Route path="/wallpapers" element={<WallpaperGallery />} />
+                  <Route path="/voice" element={<VoiceAssistant />} />
+                  <Route path="/earth" element={<EarthEvolution />} />
+                  <Route path="/neopedia-ai" element={<NeopediaAI />} />
+                  <Route path="/medical" element={<MedicalAdvances />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/settings" element={<SettingsPage />} />
                   <Route path="*" element={<NotFound />} />
