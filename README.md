@@ -1,8 +1,7 @@
-<<<<<<< HEAD
+
 🌟 NeoCore AI update — Simple version that everyone can read
 =======
-# Welcome to your Lovable project
->>>>>>> 8b1ed52 (Mon plus gros commit de cyberespace futuriste)
+>>>>>>> 8b1ed52 (My biggest futuristic cyberspace commit)
 
 I finalised and organised the entire project properly. She added the missing pages, improved the existing modules, and made the whole thing clearer and cleaner. ✨
 
@@ -14,7 +13,6 @@ NEOPEDIA 📚: a futuristic encyclopaedia that generates imaginary information f
 
 Medical advances 2030 → 2100 🧬: a simple timeline showing the evolution of medicine, decade by decade.
 
-<<<<<<< HEAD
 I also asked the AI to add several "personalities" so that it could respond differently depending on the tone: Cool 😎, Coach 💪, Friend 🤝, or Engineer 🤖 (but explained in a simple way).
 
 Finally, everything was integrated and organised into the application, without it asking me each time if I really wanted it added. Everything is clean, clear, and works together. 🚀
