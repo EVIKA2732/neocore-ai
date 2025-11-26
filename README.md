@@ -102,6 +102,4 @@ ___________________________________________________________________________
 
 ➡️ NEOCORE AI becomes a complete cyberpunk platform: customisation, animations, games, chat and exploration of the future.
 =======
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
->>>>>>> 8b1ed52 (Mon plus gros commit de cyberespace futuriste)
+8b1ed52 (My biggest commit to futuristic cyberspace)
