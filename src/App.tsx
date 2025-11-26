@@ -17,7 +17,6 @@ import Notes from "./pages/Notes";
 import Terminal from "./pages/Terminal";
 import Games from "./pages/Games";
 import CyberTalk from "./pages/CyberTalk";
-import Calendar from "./pages/Calendar";
 import Neopedia from "./pages/Neopedia";
 import PlanetaryClocks from "./pages/PlanetaryClocks";
 import ChessSpace from "./pages/ChessSpace";
@@ -30,6 +29,8 @@ import VoiceAssistant from "./pages/VoiceAssistant";
 import EarthEvolution from "./pages/EarthEvolution";
 import NeopediaAI from "./pages/NeopediaAI";
 import MedicalAdvances from "./pages/MedicalAdvances";
+import HorseRacing from "./pages/HorseRacing";
+import Globe3D from "./pages/Globe3D";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -61,8 +62,6 @@ const App = () => {
                   <Route path="/notes" element={<Notes />} />
                   <Route path="/terminal" element={<Terminal />} />
                   <Route path="/games" element={<Games />} />
-                  <Route path="/cybertalk" element={<CyberTalk />} />
-                  <Route path="/calendar" element={<Calendar />} />
                   <Route path="/neopedia" element={<Neopedia />} />
                   <Route path="/clocks" element={<PlanetaryClocks />} />
                   <Route path="/chess" element={<ChessSpace />} />
@@ -75,6 +74,8 @@ const App = () => {
                   <Route path="/earth" element={<EarthEvolution />} />
                   <Route path="/neopedia-ai" element={<NeopediaAI />} />
                   <Route path="/medical" element={<MedicalAdvances />} />
+                  <Route path="/horses" element={<HorseRacing />} />
+                  <Route path="/globe" element={<Globe3D />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/settings" element={<SettingsPage />} />
                   <Route path="*" element={<NotFound />} />

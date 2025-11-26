@@ -79,6 +79,41 @@ All colors MUST be HSL.
     --secondary: 330 100% 50%;
     --accent: 190 100% 50%;
   }
+
+  [data-theme="rainbow"] {
+    --primary: 340 100% 55%;
+    --secondary: 280 100% 60%;
+    --accent: 180 100% 50%;
+    --cyber-blue: 200 100% 50%;
+    --cyber-purple: 270 100% 60%;
+    --cyber-magenta: 320 100% 55%;
+  }
+
+  [data-theme="magenta"] {
+    --primary: 320 100% 55%;
+    --secondary: 340 100% 50%;
+    --accent: 280 100% 60%;
+  }
+
+  [data-theme="dark-gray"] {
+    --primary: 220 10% 50%;
+    --secondary: 220 10% 40%;
+    --accent: 220 10% 60%;
+    --background: 220 15% 8%;
+    --cyber-darker: 220 15% 5%;
+  }
+
+  [data-theme="neon-yellow"] {
+    --primary: 60 100% 50%;
+    --secondary: 45 100% 50%;
+    --accent: 30 100% 50%;
+  }
+
+  [data-theme="electric-blue"] {
+    --primary: 200 100% 50%;
+    --secondary: 220 100% 60%;
+    --accent: 180 100% 50%;
+  }
 }
 
 @layer base {

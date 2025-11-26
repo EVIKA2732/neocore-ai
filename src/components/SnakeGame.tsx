@@ -10,7 +10,7 @@ const GRID_SIZE = 20;
 const CELL_SIZE = 15;
 const INITIAL_SNAKE = [{ x: 10, y: 10 }];
 const INITIAL_DIRECTION: Direction = 'RIGHT';
-const GAME_SPEED = 150;
+const GAME_SPEED = 100; // Plus rapide et fluide
 
 export const SnakeGame = () => {
   const [snake, setSnake] = useState<Position[]>(INITIAL_SNAKE);
@@ -85,13 +85,13 @@ export const SnakeGame = () => {
       if (head.x === food.x && head.y === food.y) {
         setScore(prev => prev + 10);
         generateFood(newSnake);
+        return newSnake; // Keep all segments when eating
       } else {
         newSnake.pop();
+        return newSnake;
       }
-
-      return newSnake;
     });
-  }, [direction, food, isPlaying, gameOver, generateFood]);
+  }, [direction, food, isPlaying, gameOver, generateFood, checkCollision]);
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {

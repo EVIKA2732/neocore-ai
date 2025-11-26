@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { CyberCard } from "@/components/CyberCard";
 import { CyberButton } from "@/components/CyberButton";
-import { Music, Play, Pause, SkipForward, SkipBack, Volume2, Shuffle } from "lucide-react";
+import { Music, Play, Pause, SkipForward, SkipBack, Volume2, Activity } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
+import { toast } from "sonner";
 
 type MusicGenre = "jazz" | "metal" | "funk" | "rap_us" | "rap_de" | "electro" | "house" | "ambient" | "synthwave" | "cyberpunk";
 
@@ -82,6 +83,7 @@ const GENRE_LABELS: Record<MusicGenre, string> = {
 };
 
 const MusicPlayer = () => {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState([70]);
