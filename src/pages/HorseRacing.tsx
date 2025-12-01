@@ -1,100 +1,131 @@
 import { useState, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { CyberCard } from "@/components/CyberCard";
 import { CyberButton } from "@/components/CyberButton";
-import { Play, RotateCcw, Trophy } from "lucide-react";
+import { Play, RotateCcw, Trophy, ArrowRight, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 
-type Horse = {
+interface Horse {
   id: number;
   name: string;
   position: number;
   speed: number;
   color: string;
-};
+}
 
 const TRACK_LENGTH = 100;
-const INITIAL_HORSES: Horse[] = [
-  { id: 1, name: "Cyber Star", position: 0, speed: 0, color: "hsl(190, 100%, 50%)" },
-  { id: 2, name: "Neon Flash", position: 0, speed: 0, color: "hsl(330, 100%, 50%)" },
-  { id: 3, name: "Quantum Bolt", position: 0, speed: 0, color: "hsl(280, 85%, 50%)" },
-  { id: 4, name: "Plasma Runner", position: 0, speed: 0, color: "hsl(130, 100%, 50%)" },
+const FINISH_LINE = 95;
+
+const HORSE_NAMES = [
+  "Cyber Stallion",
+  "Neon Runner", 
+  "Quantum Dash",
+  "Digital Thunder"
+];
+
+const HORSE_COLORS = [
+  "#00d4ff",
+  "#ff00ea",
+  "#00ff9d",
+  "#ffea00"
 ];
 
 const HorseRacing = () => {
-  const [horses, setHorses] = useState<Horse[]>(INITIAL_HORSES);
+  const [horses, setHorses] = useState<Horse[]>([]);
+  const [playerHorse, setPlayerHorse] = useState<Horse | null>(null);
   const [isRacing, setIsRacing] = useState(false);
   const [winner, setWinner] = useState<Horse | null>(null);
-  const [playerHorse, setPlayerHorse] = useState<number>(1);
+  const [terrain, setTerrain] = useState<number[]>([]);
 
-  const resetRace = () => {
-    setHorses(INITIAL_HORSES);
-    setIsRacing(false);
+  const initRace = useCallback(() => {
+    const newHorses = HORSE_NAMES.map((name, idx) => ({
+      id: idx,
+      name,
+      position: 0,
+      speed: 0.5 + Math.random() * 0.5,
+      color: HORSE_COLORS[idx]
+    }));
+    
+    setHorses(newHorses);
+    setPlayerHorse(newHorses[0]);
     setWinner(null);
-  };
+    
+    const newTerrain = Array.from({ length: 20 }, () => Math.random() > 0.7 ? 1 : 0);
+    setTerrain(newTerrain);
+  }, []);
 
-  const startRace = () => {
-    setIsRacing(true);
-    setWinner(null);
-    toast.info("🏁 La course commence !");
-  };
+  useEffect(() => {
+    initRace();
+  }, [initRace]);
 
-  const updateRace = useCallback(() => {
+  useEffect(() => {
     if (!isRacing || winner) return;
 
-    setHorses((prevHorses) => {
-      const newHorses = prevHorses.map((horse) => {
-        const randomSpeed = Math.random() * 2 + 0.5;
-        const newPosition = Math.min(horse.position + randomSpeed, TRACK_LENGTH);
-        return { ...horse, position: newPosition, speed: randomSpeed };
-      });
+    const interval = setInterval(() => {
+      setHorses(prev => {
+        const updated = prev.map(horse => {
+          if (horse.position >= FINISH_LINE) return horse;
+          
+          const terrainIndex = Math.floor(horse.position / 5);
+          const terrainPenalty = terrain[terrainIndex] || 0;
+          const baseSpeed = horse.id === 0 ? playerHorse!.speed : horse.speed;
+          const actualSpeed = baseSpeed * (1 - terrainPenalty * 0.3);
+          
+          return {
+            ...horse,
+            position: Math.min(horse.position + actualSpeed, TRACK_LENGTH)
+          };
+        });
 
-      const finisher = newHorses.find((h) => h.position >= TRACK_LENGTH);
-      if (finisher) {
-        setWinner(finisher);
-        setIsRacing(false);
-        if (finisher.id === playerHorse) {
-          toast.success("🏆 Victoire ! Votre cheval a gagné !", {
-            className: "neon-glow"
-          });
-        } else {
-          toast("😔 Dommage, votre cheval n'a pas gagné cette fois");
+        const finisher = updated.find(h => h.position >= FINISH_LINE && !winner);
+        if (finisher) {
+          setWinner(finisher);
+          setIsRacing(false);
+          toast.success(`${finisher.name} remporte la course!`);
         }
-      }
 
-      return newHorses;
-    });
-  }, [isRacing, winner, playerHorse]);
+        return updated;
+      });
+    }, 50);
 
-  useEffect(() => {
-    if (!isRacing || winner) return;
-    const interval = setInterval(updateRace, 50);
     return () => clearInterval(interval);
-  }, [isRacing, winner, updateRace]);
+  }, [isRacing, winner, terrain, playerHorse]);
 
   useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (!isRacing || winner) return;
-      
-      if (e.key === " " || e.key === "ArrowUp") {
-        e.preventDefault();
-        setHorses((prev) =>
-          prev.map((h) =>
-            h.id === playerHorse
-              ? { ...h, position: Math.min(h.position + 3, TRACK_LENGTH) }
-              : h
-          )
-        );
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isRacing || !playerHorse || winner) return;
+
+      if (e.key === 'ArrowRight') {
+        setPlayerHorse(prev => prev ? { ...prev, speed: Math.min(prev.speed + 0.1, 2) } : null);
+      } else if (e.key === 'ArrowLeft') {
+        setPlayerHorse(prev => prev ? { ...prev, speed: Math.max(prev.speed - 0.1, 0.2) } : null);
       }
     };
 
-    window.addEventListener("keydown", handleKeyPress);
-    return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [isRacing, winner, playerHorse]);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isRacing, playerHorse, winner]);
+
+  useEffect(() => {
+    if (playerHorse) {
+      setHorses(prev => prev.map(h => h.id === 0 ? { ...h, speed: playerHorse.speed } : h));
+    }
+  }, [playerHorse]);
+
+  const startRace = () => {
+    initRace();
+    setIsRacing(true);
+    toast.success("Course lancée! Utilisez les flèches pour contrôler votre cheval");
+  };
+
+  const resetRace = () => {
+    initRace();
+    setIsRacing(false);
+  };
 
   return (
     <div className="min-h-screen pb-20 pt-8 px-4 grid-bg">
-      <div className="max-w-4xl mx-auto space-y-6">
+      <div className="max-w-6xl mx-auto space-y-6">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -103,103 +134,89 @@ const HorseRacing = () => {
           <div className="flex items-center justify-center gap-3">
             <Trophy className="h-10 w-10 text-primary animate-glow-pulse" />
             <h1 className="text-4xl font-orbitron font-black text-primary text-glow">
-              COURSE DE CHEVAUX CEI
+              COURSE CYBER-CEI
             </h1>
           </div>
-          <p className="text-muted-foreground">Choisissez votre cheval et appuyez sur ESPACE pour accélérer !</p>
+          <p className="text-muted-foreground">Course de chevaux futuriste contrôlée par IA</p>
         </motion.div>
 
-        <CyberCard className="p-6 space-y-6" glow>
-          {/* Horse selection */}
-          <div className="space-y-2">
-            <label className="text-sm font-orbitron text-primary">Choisissez votre cheval :</label>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+        <CyberCard className="p-6 space-y-4" glow>
+          <div className="relative bg-cyber-darker border-2 border-primary/30 rounded-lg p-6 min-h-[400px]">
+            <div 
+              className="absolute top-0 bottom-0 w-1 bg-primary/50"
+              style={{ left: `${FINISH_LINE}%` }}
+            >
+              <span className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs text-primary font-orbitron">
+                ARRIVÉE
+              </span>
+            </div>
+
+            <div className="absolute top-0 left-0 right-0 h-8 flex">
+              {terrain.map((obstacle, idx) => (
+                <div
+                  key={idx}
+                  className={`flex-1 border-r border-primary/10 ${
+                    obstacle ? 'bg-yellow-500/20' : 'bg-cyber-darker'
+                  }`}
+                />
+              ))}
+            </div>
+
+            <div className="space-y-6 mt-12">
               {horses.map((horse) => (
-                <button
+                <motion.div
                   key={horse.id}
-                  onClick={() => setPlayerHorse(horse.id)}
-                  disabled={isRacing}
-                  className={`p-3 rounded border-2 transition-all ${
-                    playerHorse === horse.id
-                      ? "border-primary bg-primary/20 neon-glow"
-                      : "border-primary/30 hover:border-primary/50"
-                  } ${isRacing ? "opacity-50 cursor-not-allowed" : ""}`}
+                  className="relative h-16"
                 >
-                  <div className="font-orbitron text-sm" style={{ color: horse.color }}>
-                    {horse.name}
-                  </div>
-                </button>
+                  <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-px bg-primary/10" />
+                  
+                  <motion.div
+                    className="absolute top-1/2 -translate-y-1/2"
+                    animate={{ left: `${horse.position}%` }}
+                    transition={{ duration: 0.05, ease: "linear" }}
+                  >
+                    <div className="flex flex-col items-center gap-1">
+                      <span 
+                        className="text-4xl drop-shadow-[0_0_10px_currentColor]"
+                        style={{ color: horse.color }}
+                      >
+                        🏇
+                      </span>
+                      <span 
+                        className="text-xs font-orbitron whitespace-nowrap"
+                        style={{ color: horse.color }}
+                      >
+                        {horse.name}
+                      </span>
+                    </div>
+                  </motion.div>
+                </motion.div>
               ))}
             </div>
           </div>
 
-          {/* Race track */}
-          <div className="relative bg-cyber-darker border-2 border-primary/30 rounded-lg p-6 overflow-hidden">
-            <div className="space-y-4">
-              {horses.map((horse, index) => (
-                <div key={horse.id} className="relative">
-                  <div className="flex items-center gap-3 mb-1">
-                    <span className="text-xs font-orbitron w-24" style={{ color: horse.color }}>
-                      {horse.name}
-                    </span>
-                    {winner?.id === horse.id && (
-                      <Trophy className="h-4 w-4 text-yellow-400 animate-pulse" />
-                    )}
-                  </div>
-                  <div className="relative h-8 bg-background/50 rounded border border-primary/20">
-                    {/* Finish line */}
-                    <div className="absolute right-0 top-0 bottom-0 w-1 bg-primary/50" />
-                    
-                    {/* Horse */}
-                    <motion.div
-                      className="absolute top-1/2 -translate-y-1/2 flex items-center gap-1"
-                      style={{
-                        left: `${(horse.position / TRACK_LENGTH) * 100}%`,
-                        transition: "left 0.05s linear",
-                      }}
-                    >
-                      <div
-                        className={`w-6 h-6 rounded-full ${
-                          horse.id === playerHorse ? "neon-glow-strong" : "neon-glow"
-                        }`}
-                        style={{ backgroundColor: horse.color }}
-                      />
-                      {isRacing && horse.speed > 0 && (
-                        <motion.div
-                          className="flex gap-0.5"
-                          animate={{ opacity: [0.5, 0, 0.5] }}
-                          transition={{ duration: 0.3, repeat: Infinity }}
-                        >
-                          <div className="w-1 h-1 rounded-full" style={{ backgroundColor: horse.color }} />
-                          <div className="w-1 h-1 rounded-full" style={{ backgroundColor: horse.color }} />
-                        </motion.div>
-                      )}
-                    </motion.div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
+          <AnimatePresence>
             {winner && (
               <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="absolute inset-0 flex items-center justify-center bg-cyber-dark/90 backdrop-blur-sm"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
               >
-                <div className="text-center space-y-3">
-                  <Trophy className="h-16 w-16 text-yellow-400 mx-auto animate-pulse" />
-                  <h2 className="text-3xl font-orbitron font-black text-primary">
-                    {winner.name} a gagné !
-                  </h2>
-                  {winner.id === playerHorse && (
-                    <p className="text-accent text-xl">🎉 Félicitations !</p>
-                  )}
-                </div>
+                <CyberCard className="p-6 bg-primary/10 border-2 border-primary">
+                  <div className="text-center space-y-3">
+                    <Trophy className="h-16 w-16 mx-auto text-primary animate-glow-pulse" />
+                    <h2 className="text-2xl font-orbitron text-primary">
+                      🏆 VAINQUEUR: {winner.name} 🏆
+                    </h2>
+                    {winner.id === 0 && (
+                      <p className="text-accent">Félicitations ! Vous avez gagné !</p>
+                    )}
+                  </div>
+                </CyberCard>
               </motion.div>
             )}
-          </div>
+          </AnimatePresence>
 
-          {/* Controls */}
           <div className="flex gap-3">
             <CyberButton
               variant="primary"
@@ -208,17 +225,35 @@ const HorseRacing = () => {
               disabled={isRacing}
               fullWidth
             >
-              {isRacing ? "Course en cours..." : "Démarrer la course"}
+              {isRacing ? "Course en cours..." : "Démarrer"}
             </CyberButton>
-            <CyberButton variant="accent" icon={RotateCcw} onClick={resetRace}>
+            <CyberButton
+              variant="ghost"
+              icon={RotateCcw}
+              onClick={resetRace}
+            >
               Reset
             </CyberButton>
           </div>
 
-          <div className="text-xs text-center text-muted-foreground space-y-1">
-            <p>🎮 Appuyez sur ESPACE ou ↑ pour accélérer votre cheval pendant la course</p>
-            <p>⚡ Les autres chevaux avancent automatiquement</p>
-          </div>
+          <CyberCard className="p-4 bg-cyber-darker">
+            <div className="space-y-2">
+              <h3 className="font-orbitron text-sm text-primary mb-2">Contrôles</h3>
+              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <ArrowRight className="h-4 w-4 text-primary" />
+                  <span>Accélérer</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <ArrowLeft className="h-4 w-4 text-primary" />
+                  <span>Ralentir</span>
+                </div>
+              </div>
+              <p className="text-xs text-muted-foreground pt-2">
+                Votre cheval : {horses[0]?.name} • Les zones jaunes ralentissent les chevaux
+              </p>
+            </div>
+          </CyberCard>
         </CyberCard>
       </div>
     </div>

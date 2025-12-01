@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { SnakeGame } from "@/components/SnakeGame";
-import { GhostEvasion } from "@/components/GhostEvasion";
 import { Gamepad2 } from "lucide-react";
 
 const Games = () => {
@@ -18,26 +17,16 @@ const Games = () => {
               MINI-JEUX NÉON
             </h1>
           </div>
-          <p className="text-muted-foreground">Détendez-vous avec des classiques futuristes</p>
+          <p className="text-muted-foreground">Classiques futuristes</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <SnakeGame />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <GhostEvasion />
-          </motion.div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <SnakeGame />
+        </motion.div>
       </div>
     </div>
   );

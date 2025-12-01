@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { CyberCard } from "@/components/CyberCard";
 import { CyberButton } from "@/components/CyberButton";
-import { Music, Play, Pause, SkipForward, SkipBack, Volume2, Activity } from "lucide-react";
+import { Music, Play, Pause, SkipForward, SkipBack, Volume2, Activity, Search } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import { toast } from "sonner";
 
@@ -89,7 +89,9 @@ const MusicPlayer = () => {
   const [volume, setVolume] = useState([70]);
   const [selectedGenre, setSelectedGenre] = useState<MusicGenre | "all">("all");
   const [smartMode, setSmartMode] = useState(false);
-  const [userActivity, setUserActivity] = useState(5); // 1-10 scale
+  const [userActivity, setUserActivity] = useState(5);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [currentTime, setCurrentTime] = useState(0);
 
   // Smart music selection based on user behavior
   useEffect(() => {
@@ -135,13 +137,70 @@ const MusicPlayer = () => {
     }
   }, [userActivity, smartMode, currentTrack]);
 
-  const filteredTracks = selectedGenre === "all" 
-    ? MUSIC_LIBRARY 
-    : MUSIC_LIBRARY.filter(t => t.genre === selectedGenre);
+  useEffect(() => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio();
+    }
+
+    const audio = audioRef.current;
+    
+    audio.volume = volume[0] / 100;
+    
+    const handleTimeUpdate = () => {
+      setCurrentTime(audio.currentTime);
+    };
+    
+    const handleEnded = () => {
+      nextTrack();
+    };
+
+    audio.addEventListener('timeupdate', handleTimeUpdate);
+    audio.addEventListener('ended', handleEnded);
+
+    return () => {
+      audio.removeEventListener('timeupdate', handleTimeUpdate);
+      audio.removeEventListener('ended', handleEnded);
+    };
+  }, [volume]);
+
+  useEffect(() => {
+    if (audioRef.current && currentTrack) {
+      audioRef.current.src = `https://www.soundhelix.com/examples/mp3/SoundHelix-Song-${(currentTrack.id.charCodeAt(0) % 16) + 1}.mp3`;
+      
+      if (isPlaying) {
+        audioRef.current.play().catch(err => {
+          console.error('Playback error:', err);
+          toast.error("Erreur de lecture audio");
+        });
+      }
+    }
+  }, [currentTrack]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.play().catch(err => {
+          console.error('Playback error:', err);
+          toast.error("Erreur de lecture audio");
+        });
+      } else {
+        audioRef.current.pause();
+      }
+    }
+  }, [isPlaying]);
+
+  const filteredTracks = MUSIC_LIBRARY.filter(track => {
+    const matchesGenre = selectedGenre === "all" || track.genre === selectedGenre;
+    const matchesSearch = searchQuery === "" || 
+      track.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      track.artist.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesGenre && matchesSearch;
+  });
 
   const playTrack = (track: Track) => {
     setCurrentTrack(track);
     setIsPlaying(true);
+    toast.success(`Lecture : ${track.title}`);
   };
 
   const togglePlay = () => {
@@ -240,6 +299,25 @@ const MusicPlayer = () => {
           </CyberCard>
         </motion.div>
 
+        {/* Search Bar */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+        >
+          <CyberCard className="p-4" glow>
+            <div className="flex items-center gap-3">
+              <Search className="h-5 w-5 text-primary" />
+              <input
+                type="text"
+                placeholder="Rechercher un titre ou artiste..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="flex-1 bg-cyber-darker border border-primary/30 rounded px-3 py-2 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none"
+              />
+            </div>
+          </CyberCard>
+        </motion.div>
+
         {/* Smart Mode */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -248,7 +326,7 @@ const MusicPlayer = () => {
           <CyberCard className="p-4" glow>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Shuffle className="h-5 w-5 text-primary" />
+                <Activity className="h-5 w-5 text-primary" />
                 <div>
                   <p className="font-orbitron text-sm text-primary">Mode Intelligent</p>
                   <p className="text-xs text-muted-foreground">

@@ -16,8 +16,6 @@ import ChatAI from "./pages/ChatAI";
 import Notes from "./pages/Notes";
 import Terminal from "./pages/Terminal";
 import Games from "./pages/Games";
-import CyberTalk from "./pages/CyberTalk";
-import Neopedia from "./pages/Neopedia";
 import PlanetaryClocks from "./pages/PlanetaryClocks";
 import ChessSpace from "./pages/ChessSpace";
 import Nanomedicine from "./pages/Nanomedicine";
@@ -31,6 +29,8 @@ import NeopediaAI from "./pages/NeopediaAI";
 import MedicalAdvances from "./pages/MedicalAdvances";
 import HorseRacing from "./pages/HorseRacing";
 import Globe3D from "./pages/Globe3D";
+import TaskAutomation from "./pages/TaskAutomation";
+import FuturePredictions from "./pages/FuturePredictions";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -62,7 +62,6 @@ const App = () => {
                   <Route path="/notes" element={<Notes />} />
                   <Route path="/terminal" element={<Terminal />} />
                   <Route path="/games" element={<Games />} />
-                  <Route path="/neopedia" element={<Neopedia />} />
                   <Route path="/clocks" element={<PlanetaryClocks />} />
                   <Route path="/chess" element={<ChessSpace />} />
                   <Route path="/nanomedicine" element={<Nanomedicine />} />
@@ -76,6 +75,8 @@ const App = () => {
                   <Route path="/medical" element={<MedicalAdvances />} />
                   <Route path="/horses" element={<HorseRacing />} />
                   <Route path="/globe" element={<Globe3D />} />
+                  <Route path="/automation" element={<TaskAutomation />} />
+                  <Route path="/predictions" element={<FuturePredictions />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/settings" element={<SettingsPage />} />
                   <Route path="*" element={<NotFound />} />
