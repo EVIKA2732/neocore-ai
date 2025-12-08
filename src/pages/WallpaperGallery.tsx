@@ -1,46 +1,113 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { CyberCard } from "@/components/CyberCard";
 import { CyberButton } from "@/components/CyberButton";
-import { Image, Download, Sparkles } from "lucide-react";
+import { Image, Download, Sparkles, Check, Loader2, Sun, Moon } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
-const WALLPAPER_PROMPTS = [
-  "Cyberpunk city at night with neon lights and rain, ultra high resolution",
-  "Futuristic space station orbiting a neon planet, cinematic lighting",
-  "Digital rain matrix code falling in neon blue and pink colors",
-  "Neon samurai warrior in cyberpunk Tokyo streets, dramatic lighting",
-  "Holographic interface with floating data streams, purple and cyan",
-  "Dystopian megacity with flying cars and neon advertisements",
-  "Quantum computer core with glowing circuits, abstract tech art",
-  "Cyberpunk hacker den with multiple screens showing code",
-  "Futuristic neural network visualization with glowing nodes",
-  "Neon grid landscape in retrowave style with purple sunset",
-  "Cybernetic eye close-up with circuit reflections",
-  "Abstract digital waves in neon colors, fluid motion",
+const CYBERPUNK_PROMPTS = [
+  "Cyberpunk city at night with neon lights reflecting on wet streets, flying cars, holographic advertisements, ultra detailed",
+  "Futuristic Tokyo street in rain with neon signs, cyberpunk aesthetic, blade runner style",
+  "Massive cyberpunk megacity skyline with towering skyscrapers, neon purple and blue lights",
+  "Underground cyber hacker den with multiple holographic screens, dark atmosphere",
+  "Cyberpunk alley with steam vents, neon shop signs in Japanese, rainy night",
+  "Futuristic nightclub interior with holographic dancers, neon lights everywhere",
+  "Cyberpunk rooftop view of megacity, flying vehicles, massive digital billboards",
+  "Dark cyber street market with vendors selling tech, neon glow, atmospheric",
+  "Cybernetic laboratory with glowing equipment, blue and purple lighting",
+  "Abandoned cyber district with broken neon signs, moody atmosphere",
+  "Futuristic cyber café with holographic menus, cozy neon ambiance",
+  "Cyberpunk highway with speeding vehicles, city lights in background"
 ];
 
+// High-quality cyberpunk wallpapers from Unsplash
+const CYBERPUNK_IMAGES = [
+  "https://images.unsplash.com/photo-1515705576963-95cad62945b6?w=1920&q=90",
+  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=90",
+  "https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=1920&q=90",
+  "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1920&q=90",
+  "https://images.unsplash.com/photo-1514565131-fce0801e5785?w=1920&q=90",
+  "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=1920&q=90",
+  "https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1920&q=90",
+  "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1920&q=90",
+  "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1920&q=90",
+  "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1920&q=90",
+  "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1920&q=90",
+  "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=90"
+];
+
+interface Wallpaper {
+  id: number;
+  url: string;
+  prompt: string;
+  isAI: boolean;
+}
+
 const WallpaperGallery = () => {
-  const [wallpapers, setWallpapers] = useState<Array<{ id: number; url: string; prompt: string }>>([]);
+  const [wallpapers, setWallpapers] = useState<Wallpaper[]>([]);
   const [generating, setGenerating] = useState(false);
   const [selectedWallpaper, setSelectedWallpaper] = useState<string | null>(null);
+  const [brightness, setBrightness] = useState(70);
+
+  // Load saved wallpaper on mount
+  useEffect(() => {
+    const savedWallpaper = localStorage.getItem('neocore_wallpaper');
+    const savedBrightness = localStorage.getItem('neocore_wallpaper_brightness');
+    if (savedWallpaper) {
+      setSelectedWallpaper(savedWallpaper);
+      applyWallpaperToBody(savedWallpaper, parseInt(savedBrightness || '70'));
+    }
+    if (savedBrightness) {
+      setBrightness(parseInt(savedBrightness));
+    }
+  }, []);
+
+  const applyWallpaperToBody = (url: string, bright: number = brightness) => {
+    document.body.style.backgroundImage = `linear-gradient(rgba(0,0,0,${(100 - bright) / 100}), rgba(0,0,0,${(100 - bright) / 100})), url(${url})`;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundPosition = 'center';
+    document.body.style.backgroundAttachment = 'fixed';
+  };
 
   const generateWallpaper = async () => {
     setGenerating(true);
     try {
-      const randomPrompt = WALLPAPER_PROMPTS[Math.floor(Math.random() * WALLPAPER_PROMPTS.length)];
+      const randomPrompt = CYBERPUNK_PROMPTS[Math.floor(Math.random() * CYBERPUNK_PROMPTS.length)];
       
-      // Simulate generation (in real app, would call image generation API)
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Try AI generation first
+      try {
+        const { data, error } = await supabase.functions.invoke('ai-wallpaper', {
+          body: { prompt: randomPrompt }
+        });
+        
+        if (!error && data?.imageUrl) {
+          const newWallpaper: Wallpaper = {
+            id: Date.now(),
+            url: data.imageUrl,
+            prompt: randomPrompt,
+            isAI: true
+          };
+          setWallpapers(prev => [newWallpaper, ...prev]);
+          toast.success("Fond d'écran IA généré !");
+          return;
+        }
+      } catch (aiError) {
+        console.log("AI generation unavailable, using fallback");
+      }
       
-      const newWallpaper = {
+      // Fallback to curated images
+      const randomImage = CYBERPUNK_IMAGES[Math.floor(Math.random() * CYBERPUNK_IMAGES.length)];
+      
+      const newWallpaper: Wallpaper = {
         id: Date.now(),
-        url: `https://picsum.photos/1920/1080?random=${Date.now()}`, // Placeholder
-        prompt: randomPrompt
+        url: randomImage,
+        prompt: randomPrompt,
+        isAI: false
       };
       
       setWallpapers(prev => [newWallpaper, ...prev]);
-      toast.success("Fond d'écran généré avec succès");
+      toast.success("Fond d'écran cyberpunk ajouté !");
     } catch (error) {
       toast.error("Erreur lors de la génération");
     } finally {
@@ -50,20 +117,49 @@ const WallpaperGallery = () => {
 
   const applyWallpaper = (url: string) => {
     setSelectedWallpaper(url);
-    document.body.style.backgroundImage = `url(${url})`;
-    document.body.style.backgroundSize = 'cover';
-    document.body.style.backgroundPosition = 'center';
-    document.body.style.backgroundAttachment = 'fixed';
+    applyWallpaperToBody(url, brightness);
     localStorage.setItem('neocore_wallpaper', url);
-    toast.success("Fond d'écran appliqué");
+    localStorage.setItem('neocore_wallpaper_brightness', brightness.toString());
+    toast.success("Fond d'écran appliqué !");
   };
 
-  const downloadWallpaper = (url: string, id: number) => {
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `neocore-wallpaper-${id}.jpg`;
-    a.click();
-    toast.success("Téléchargement démarré");
+  const updateBrightness = (newBrightness: number) => {
+    setBrightness(newBrightness);
+    if (selectedWallpaper) {
+      applyWallpaperToBody(selectedWallpaper, newBrightness);
+      localStorage.setItem('neocore_wallpaper_brightness', newBrightness.toString());
+    }
+  };
+
+  const removeWallpaper = () => {
+    setSelectedWallpaper(null);
+    document.body.style.backgroundImage = '';
+    document.body.style.background = '';
+    localStorage.removeItem('neocore_wallpaper');
+    localStorage.removeItem('neocore_wallpaper_brightness');
+    toast.success("Fond d'écran supprimé");
+  };
+
+  const downloadWallpaper = async (url: string, id: number) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const downloadUrl = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = `neocore-wallpaper-${id}.jpg`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(downloadUrl);
+      
+      toast.success("Téléchargement démarré !");
+    } catch (error) {
+      // Fallback for CORS issues
+      window.open(url, '_blank');
+      toast.info("Ouverture dans un nouvel onglet");
+    }
   };
 
   return (
@@ -80,19 +176,53 @@ const WallpaperGallery = () => {
               GALERIE CYBERPUNK
             </h1>
           </div>
-          <p className="text-muted-foreground">Fonds d'écran générés par IA</p>
+          <p className="text-muted-foreground">Fonds d'écran haute qualité</p>
         </motion.div>
 
-        <div className="flex justify-center">
+        {/* Controls */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <CyberButton
             variant="primary"
-            icon={Sparkles}
+            icon={generating ? Loader2 : Sparkles}
             onClick={generateWallpaper}
             disabled={generating}
           >
-            {generating ? "Génération en cours..." : "Générer un fond d'écran"}
+            {generating ? "Génération..." : "Générer un fond"}
           </CyberButton>
+          
+          {selectedWallpaper && (
+            <CyberButton variant="ghost" onClick={removeWallpaper}>
+              Supprimer le fond
+            </CyberButton>
+          )}
         </div>
+
+        {/* Brightness Control */}
+        {selectedWallpaper && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <CyberCard className="p-4 max-w-md mx-auto">
+              <div className="flex items-center gap-4">
+                <Moon className="h-4 w-4 text-muted-foreground" />
+                <input
+                  type="range"
+                  min="20"
+                  max="100"
+                  value={brightness}
+                  onChange={(e) => updateBrightness(parseInt(e.target.value))}
+                  className="flex-1 accent-primary"
+                />
+                <Sun className="h-4 w-4 text-primary" />
+                <span className="text-sm text-primary w-12">{brightness}%</span>
+              </div>
+              <p className="text-xs text-muted-foreground text-center mt-2">
+                Luminosité du fond d'écran
+              </p>
+            </CyberCard>
+          </motion.div>
+        )}
 
         {wallpapers.length === 0 ? (
           <motion.div
@@ -127,7 +257,21 @@ const WallpaperGallery = () => {
                       src={wallpaper.url}
                       alt={wallpaper.prompt}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      loading="lazy"
                     />
+                    
+                    {selectedWallpaper === wallpaper.url && (
+                      <div className="absolute top-2 right-2 bg-primary rounded-full p-1">
+                        <Check className="h-4 w-4 text-primary-foreground" />
+                      </div>
+                    )}
+                    
+                    {wallpaper.isAI && (
+                      <div className="absolute top-2 left-2 bg-accent/80 text-accent-foreground text-xs px-2 py-1 rounded">
+                        IA
+                      </div>
+                    )}
+                    
                     <div className="absolute inset-0 bg-gradient-to-t from-cyber-dark via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     
                     <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform">
@@ -143,7 +287,7 @@ const WallpaperGallery = () => {
                           variant="ghost"
                           icon={Download}
                           onClick={() => downloadWallpaper(wallpaper.url, wallpaper.id)}
-                        >DL</CyberButton>
+                        />
                       </div>
                     </div>
                   </div>
@@ -160,9 +304,9 @@ const WallpaperGallery = () => {
         )}
 
         <div className="text-center">
-          <CyberCard className="p-6 inline-block">
+          <CyberCard className="p-4 inline-block">
             <p className="text-sm text-muted-foreground">
-              💡 Les fonds d'écran sont générés aléatoirement avec des prompts cyberpunk
+              💡 Les fonds d'écran sont générés avec des thèmes cyberpunk haute qualité
             </p>
           </CyberCard>
         </div>

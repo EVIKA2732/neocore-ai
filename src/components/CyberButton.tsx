@@ -3,8 +3,8 @@ import { cn } from "@/lib/utils";
 import { LucideIcon } from "lucide-react";
 
 interface CyberButtonProps {
-  children: React.ReactNode;
-  onClick?: () => void;
+  children?: React.ReactNode;
+  onClick?: (e?: React.MouseEvent) => void;
   variant?: "primary" | "secondary" | "accent" | "ghost";
   icon?: LucideIcon;
   className?: string;
@@ -40,7 +40,7 @@ export const CyberButton = ({
         className
       )}
     >
-      {Icon && <Icon className="mr-2 h-5 w-5" />}
+      {Icon && <Icon className={cn("h-5 w-5", children && "mr-2")} />}
       {children}
     </Button>
   );

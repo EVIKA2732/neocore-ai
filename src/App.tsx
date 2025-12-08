@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { SplashScreen } from "./components/SplashScreen";
 import { Navigation } from "./components/Navigation";
 import { LegalFooter } from "./components/LegalFooter";
+import { SleepMode } from "./components/SleepMode";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Modules from "./pages/Modules";
@@ -54,36 +55,38 @@ const App = () => {
             <SplashScreen onComplete={() => setShowSplash(false)} />
           ) : (
             <BrowserRouter>
-              <div className="min-h-screen bg-background">
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/modules" element={<Modules />} />
-                  <Route path="/chat" element={<ChatAI />} />
-                  <Route path="/notes" element={<Notes />} />
-                  <Route path="/terminal" element={<Terminal />} />
-                  <Route path="/games" element={<Games />} />
-                  <Route path="/clocks" element={<PlanetaryClocks />} />
-                  <Route path="/chess" element={<ChessSpace />} />
-                  <Route path="/nanomedicine" element={<Nanomedicine />} />
-                  <Route path="/timetravel" element={<TimeTravel />} />
-                  <Route path="/music" element={<MusicPlayer />} />
-                  <Route path="/lock" element={<LockScreen />} />
-                  <Route path="/wallpapers" element={<WallpaperGallery />} />
-                  <Route path="/voice" element={<VoiceAssistant />} />
-                  <Route path="/earth" element={<EarthEvolution />} />
-                  <Route path="/neopedia-ai" element={<NeopediaAI />} />
-                  <Route path="/medical" element={<MedicalAdvances />} />
-                  <Route path="/horses" element={<HorseRacing />} />
-                  <Route path="/globe" element={<Globe3D />} />
-                  <Route path="/automation" element={<TaskAutomation />} />
-                  <Route path="/predictions" element={<FuturePredictions />} />
-                  <Route path="/profile" element={<Profile />} />
-                  <Route path="/settings" element={<SettingsPage />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-                <Navigation />
-                <LegalFooter />
-              </div>
+              <SleepMode timeout={600000}>
+                <div className="min-h-screen bg-background">
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/modules" element={<Modules />} />
+                    <Route path="/chat" element={<ChatAI />} />
+                    <Route path="/notes" element={<Notes />} />
+                    <Route path="/terminal" element={<Terminal />} />
+                    <Route path="/games" element={<Games />} />
+                    <Route path="/clocks" element={<PlanetaryClocks />} />
+                    <Route path="/chess" element={<ChessSpace />} />
+                    <Route path="/nanomedicine" element={<Nanomedicine />} />
+                    <Route path="/timetravel" element={<TimeTravel />} />
+                    <Route path="/music" element={<MusicPlayer />} />
+                    <Route path="/lock" element={<LockScreen />} />
+                    <Route path="/wallpapers" element={<WallpaperGallery />} />
+                    <Route path="/voice" element={<VoiceAssistant />} />
+                    <Route path="/earth" element={<EarthEvolution />} />
+                    <Route path="/neopedia-ai" element={<NeopediaAI />} />
+                    <Route path="/medical" element={<MedicalAdvances />} />
+                    <Route path="/horses" element={<HorseRacing />} />
+                    <Route path="/globe" element={<Globe3D />} />
+                    <Route path="/automation" element={<TaskAutomation />} />
+                    <Route path="/predictions" element={<FuturePredictions />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/settings" element={<SettingsPage />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                  <Navigation />
+                  <LegalFooter />
+                </div>
+              </SleepMode>
             </BrowserRouter>
           )}
         </TooltipProvider>
