@@ -1,7 +1,5 @@
 🌟 NEOCORE AI — HISTORIQUE DES MISES À JOUR (CHRONOLOGIQUE)
 
-(Simplifié, stylé, clair, avec emojis)
-
 🟣 V1.0 – Cyberpunk Update
 
 🎨 Thèmes personnalisables
