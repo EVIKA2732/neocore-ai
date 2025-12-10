@@ -165,12 +165,6 @@ Version 3.0 – Total Overhaul Update
 
 🧠 IA comportementale améliorée
 
-Réponses sur Mike désormais nuancées
-
-Mentionne que Mike est développeur logiciel / DevOps uniquement si on le demande
-
-Pas de référence spontanée aux diplômes
-
 La technologie est toujours présentée comme positive pour l’humanité
 
 🖼️ Nouveau favicon + purge de l’ancien logo ❤️
