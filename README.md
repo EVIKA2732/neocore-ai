@@ -1,144 +1,130 @@
-🌟 NEOCORE AI — HISTORIQUE DES MISES À JOUR (CHRONOLOGIQUE)
+🌟 NEOCORE AI — UPDATE HISTORY (CHRONOLOGICAL)
 
 🟣 V1.0 – Cyberpunk Update
 
-🎨 Thèmes personnalisables
+🎨 Customisable themes
 
-Bleu 🔵, rose 🌸, vert 🟢, orange 🟧, violet 💜
+Blue 🔵, pink 🌸, green 🟢, orange 🟧, purple 💜
 
-🌌 Background animé
+🌌 Animated background
 
-Hologrammes, pulsations lumineuses, ambiance futuriste vivante
+Holograms, pulsating lights, vibrant futuristic atmosphere
 
-💻 Terminal futuriste
+💻 Futuristic terminal
 
-Prédictions et scanlines visuelles
+Predictions and visual scanlines
 
-Feedback dynamique façon Ghost in the Shell
+Dynamic feedback in the style of Ghost in the Shell
 
-💬 Cyberpunk Chat sécurisé
+💬 Secure Cyberpunk Chat
 
-Discussion cryptée via lien privé
+Encrypted chat via private link
 
-Style Matrix / Signal 👽
+Matrix/Signal style 👽
 
-🕹️ Mini-jeux intégrés
+🕹️ Integrated mini-games
 
 Snake Cyberpunk Edition 🐍
 
 Escape Ghost Protocol 👻
 
-🗺️ Calendrier, cartes et horloges
+🗺️ Calendar, maps and clocks
 
-Fusion entre Terre et univers intergalactique
+Merging Earth and the intergalactic universe
 
-📚 NeoPedia AI (première version)
+📚 NeoPedia AI (first version)
 
-Wiki du futur, technologies avancées et vaisseaux stellaires
+Wiki of the future, advanced technologies and starships
 
-➡️ Première étape solide : une plateforme cyberpunk immersive.
+➡️ First solid step: an immersive cyberpunk platform.
 
 🟡 V2.0 – Intergalactic Update 🌌
 
-🐍 Jeux améliorés
+🐍 Improved games
 
-Snake futuriste fluide
+Smooth futuristic Snake
 
-Ghost Evasion debug complet
+Ghost Evasion fully debugged
 
-Nouveaux jeux : Space Chess ♟️ et Intergalactic Slither.io 🌠
+New games: Space Chess ♟️ and Intergalactic Slither.io 🌠
 
-💻 Terminal avancé
+💻 Advanced terminal
 
-Nouveaux profils
+New profiles
 
-Plus de commandes système
+More system commands
 
-Statut neural amélioré
+Improved neural status
 
-🕰️ Horloges planétaires
+🕰️ Planetary clocks
 
-Simulation temporelle sur 5 planètes
+Time simulation on 5 planets
 
-Calendrier intergalactique
+Intergalactic calendar
 
-🎵 Streaming Musical
+🎵 Music streaming
 
-Lecteur interne
+Internal reader
+💬 Chat of the future
 
-Intégration YouTube Music
+Chat with AI, humans or "aliens"
 
-📚 Neopedia AI enrichie
+Message decoder
 
-Plus de contenus futuristes
+🕹️ Time travel & immersion
 
-🗺️ Carte du futur
+The interface changes according to the era selected
 
-Exploration interactive 2025 → 2100
-
-💬 Chat du futur
-
-Discussion avec IA, humains ou “aliens”
-
-Décodeur de messages
-
-🕹️ Voyage temporel & immersion
-
-L’interface change selon l’époque sélectionnée
-
-➡️ NEOCORE devient une expérience complète : jeux, exploration, chat et futurisme.
+➡️ NEOCORE becomes a complete experience: games, exploration, chat and futurism.
 
 🔵 V2.8.6 – Major Compliance Update
 
-✨ Sécurité & légalité renforcées
+✨ Enhanced security & legality
 
-Suppression totale des réponses médicales/juridiques
+Complete removal of medical/legal responses
 
-Avertissement automatique :
-⚠️ contenu spéculatif, non médical, non juridique
+Automatic warning:
+⚠️ speculative, non-medical, non-legal content
 
-🔘 Bouton RGPD
+🔘 GDPR button
 
-Gestion simple des données personnelles
+Simple management of personal data
 
-Suppression rapide et totale des données stockées
+Quick and complete deletion of stored data
 
-♟️ Jeu d’échecs amélioré
+♟️ Improved chess game
 
-Respect strict des règles
+Strict compliance with rules
 
-Plus de mouvements invalides possibles
+No more invalid moves possible
 
-🗑️ Suppression instantanée des données
+🗑️ Instant data deletion
 
-Nouveau bouton dédié
+New dedicated button
 
-💡 Améliorations générales
+💡 General improvements
 
-Interface plus fluide
+Smoother interface
 
-Correction mineures dans les mini-jeux
+Minor corrections in mini-games
 
-Modules réorganisés
+Reorganised modules
 
-💜 Résumé
-NEOCORE devient plus responsable, sécurisé et professionnel.
+💜 Summary
+NEOCORE is becoming more responsible, secure and professional.
 
 🟣 V2.9.x – Future Knowledge Update
+Imaginative, futuristic, coherent
 
-📚 NeoPedia — nouvelle génération
+Improved internal structure
 
-Imaginaire, futuriste, cohérente
+🧬 Medicine 2030 → 2100
 
-Meilleure structure interne
+Timeline by decade
 
-🧬 Médecine 2030 → 2100
+Futuristic vision of medical technology
 
-Frise chronologique par décennie
-
-Vision futuriste de la technologie médicale
-
-😎 Personnalités IA
+😎 AI personalities
 
 Cool 😎
 
@@ -148,96 +134,96 @@ Friend 🤝
 
 Engineer 🤖
 
-Explications simplifiées pour un usage grand public
+Simplified explanations for general public use
 
-📃 Légal + RGPD retravaillés
+📃 Legal + GDPR reworked
 
-Textes simplifiés & modernisés
+Simplified & modernised texts
 
-Cohérence totale
+Total consistency
 
-✔️ Tout a été intégré proprement et sans confirmations inutiles.
+✔️ Everything has been integrated cleanly and without unnecessary confirmations.
 
-🔥 🆕 AJOUT — Nouvelle mise à jour (Celle que tu viens de demander)
+🔥 🆕 ADDITION — New update (The one you just requested)
 
 Version 3.0 – Total Overhaul Update
-(à placer en haut du changelog)
+(to be placed at the top of the changelog)
 
-🧠 IA comportementale améliorée
+🧠 Improved behavioural AI
 
-La technologie est toujours présentée comme positive pour l’humanité
+Technology is always presented as positive for humanity
 
-🖼️ Nouveau favicon + purge de l’ancien logo ❤️
+🖼️ New favicon + removal of the old logo ❤️
 
-Icône Lovable supprimée
+Lovable icon removed
 
-Nouveau favicon cyberpunk ajouté
+New cyberpunk favicon added
 
-🌍 Planète 3D améliorée
+🌍 Improved 3D planet
 
-Fuseaux horaires UTC
+UTC time zones
 
-Frontières mondiales détaillées
+Detailed global borders
 
-Texture HD type NASA
+NASA-style HD texture
 
-Animation satellite + vitesse terrestre
+Satellite animation + Earth speed
 
-Liste des lieux déplacée à droite
+List of locations moved to the right
 
-🎵 Lecteur musical IA — FIX MAJEUR
+🎵 AI music player — MAJOR FIX
 
-La musique sort enfin (problème audio résolu)
+The music is finally coming out (audio issue resolved)
 
-Rap = vrai rap, Jazz = vrai jazz
+Rap = real rap, Jazz = real jazz
 
-Génération réaliste et cohérente
+Realistic and consistent generation
 
-Bouton volume ajouté
+Volume button added
 
-Mode Intelligent basé sur les préférences (clics invisibles comptabilisés)
+Intelligent mode based on preferences (invisible clicks counted)
 
-🌙 Mode veille revu
+🌙 Standby mode revised
 
-Inactivité → 5 minutes
+Inactivity → 5 minutes
 
-Cinématique spatiale + Terre réaliste
+Spatial kinematics + realistic Earth
 
-IA “vivante” en arrière-plan
+"Living" AI in the background
 
-🖼️ Fond d’écran Cyberpunk — totale refonte
+🖼️ Cyberpunk wallpaper — complete overhaul
 
-Génération stable
+Stable generation
 
-Application qui fonctionne vraiment
+Application that really works
 
-Harmonisation avec l’UI
+Harmonisation with the UI
 
-Luminosité gérée pour rester lisible
+Brightness managed to remain readable
 
-⚠️ RGPD — correction
+⚠️ GDPR — correction
 
-Suppression “fichiers uploadés (max X Go)”
+Deletion of "uploaded files (max X GB)"
 
-Tout est 100% local, aucune donnée envoyée
+Everything is 100% local, no data sent
 
-🔄 Automatisation réaliste
+🔄 Realistic automation
 
-Animation backup, scan et historique
+Backup, scan and history animation
 
-Détection de menace simulée
+Simulated threat detection
 
-Interface professionnelle futuriste
+Futuristic professional interface
 
-🐎 Mini-jeu course de chevaux
+🐎 Horse racing mini-game
 
-Vitesse réaliste
+Realistic speed
 
-IA équitable
+Fair AI
 
-Possibilité de perdre même en accélérant
+Possibility of losing even when accelerating
 
-Contrôles fluidifiés
+Smoother controls
 
 🧬 Nanomédecine + médecine futuriste
 
