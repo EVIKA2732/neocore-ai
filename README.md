@@ -1,4 +1,4 @@
-🌟 NEOCORE AI — UPDATE HISTORY (CHRONOLOGICAL)
+🌟 NEOCORE AI — UPDATE HISTORY (CHRONOLOGICAL HERE 22nd Century)
 
 🟣 V1.0 – Cyberpunk Update
 
