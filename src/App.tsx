@@ -55,7 +55,7 @@ const App = () => {
             <SplashScreen onComplete={() => setShowSplash(false)} />
           ) : (
             <BrowserRouter>
-              <SleepMode timeout={600000}>
+              <SleepMode timeout={300000}>
                 <div className="min-h-screen bg-background">
                   <Routes>
                     <Route path="/" element={<Home />} />

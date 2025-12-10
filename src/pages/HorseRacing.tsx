@@ -46,21 +46,25 @@ const HorseRacing = () => {
   const gameLoopRef = useRef<number>();
 
   const initRace = useCallback(() => {
+    // All horses start with similar base speeds - more balanced
+    const baseSpeed = 0.35;
     const newHorses = HORSE_NAMES.map((name, idx) => ({
       id: idx,
       name,
       position: 0,
-      speed: 0.3 + Math.random() * 0.4,
+      speed: baseSpeed + Math.random() * 0.25, // 0.35-0.60 range
       color: HORSE_COLORS[idx],
       lane: idx
     }));
     
+    // Player horse starts at average speed - can win or lose
     setHorses(newHorses);
-    setPlayerHorse({ ...newHorses[0], speed: 0.5 });
+    setPlayerHorse({ ...newHorses[0], speed: 0.42 });
     setWinner(null);
     setCountdown(null);
     
-    const newTerrain = Array.from({ length: 25 }, () => Math.random() > 0.75 ? 1 : 0);
+    // More varied terrain
+    const newTerrain = Array.from({ length: 25 }, () => Math.random() > 0.7 ? 1 : 0);
     setTerrain(newTerrain);
   }, []);
 
@@ -87,11 +91,13 @@ const HorseRacing = () => {
           
           const terrainIndex = Math.floor(horse.position / 4);
           const terrainPenalty = terrain[terrainIndex] || 0;
-          const baseSpeed = horse.id === 0 ? (playerHorse?.speed || 0.5) : horse.speed;
+          const baseSpeed = horse.id === 0 ? (playerHorse?.speed || 0.42) : horse.speed;
           
-          // Add slight randomness for AI horses
-          const randomFactor = horse.id === 0 ? 1 : (0.9 + Math.random() * 0.2);
-          const actualSpeed = baseSpeed * (1 - terrainPenalty * 0.25) * randomFactor * deltaTime;
+          // More balanced randomness - AI horses have significant variation
+          // This allows any horse to win, including player losing
+          const randomFactor = 0.85 + Math.random() * 0.35; // 0.85 - 1.20
+          const staminaVariation = horse.id === 0 ? 1 : (0.95 + Math.random() * 0.15); // AI stamina
+          const actualSpeed = baseSpeed * (1 - terrainPenalty * 0.2) * randomFactor * staminaVariation * deltaTime;
           
           return {
             ...horse,
@@ -131,10 +137,12 @@ const HorseRacing = () => {
 
       if (e.key === 'ArrowRight') {
         e.preventDefault();
-        setPlayerHorse(prev => prev ? { ...prev, speed: Math.min(prev.speed + 0.08, 1.5) } : null);
+        // Smaller boost, max speed capped lower
+        setPlayerHorse(prev => prev ? { ...prev, speed: Math.min(prev.speed + 0.04, 0.85) } : null);
       } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
-        setPlayerHorse(prev => prev ? { ...prev, speed: Math.max(prev.speed - 0.05, 0.15) } : null);
+        // Can slow down more
+        setPlayerHorse(prev => prev ? { ...prev, speed: Math.max(prev.speed - 0.03, 0.2) } : null);
       }
     };
 

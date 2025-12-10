@@ -232,10 +232,10 @@ const SettingsPage = () => {
                     <strong className="text-foreground">Vos droits :</strong> Conformément au Règlement Général sur la Protection des Données (RGPD - UE 2016/679), vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation du traitement, de portabilité et d'opposition concernant vos données personnelles.
                   </p>
                   <p>
-                    <strong className="text-foreground">Données stockées localement :</strong> Notes personnelles, missions et objectifs, historiques de conversations avec l'IA, scores et progressions dans les jeux, préférences d'interface (thèmes, paramètres), fichiers audio importés (assistant vocal), musiques personnelles uploadées (max 2 Go).
+                    <strong className="text-foreground">Données stockées localement :</strong> Notes personnelles, missions et objectifs, historiques de conversations avec l'IA, scores et progressions dans les jeux, préférences d'interface (thèmes, paramètres).
                   </p>
                   <p>
-                    <strong className="text-foreground">Traitement et conservation :</strong> Toutes vos données sont stockées exclusivement en local sur votre appareil (localStorage). Aucune transmission à des serveurs externes ou tiers. Aucun tracking, cookie ou analyse comportementale.
+                    <strong className="text-foreground">Traitement et conservation :</strong> Toutes vos données sont stockées exclusivement en local sur votre appareil (localStorage). Aucune donnée n'est uploadée vers des serveurs externes. Aucun accès extérieur possible. Aucun tracking, cookie ou analyse comportementale.
                   </p>
                   <p>
                     <strong className="text-foreground">Sécurité :</strong> Les données sont protégées par les mécanismes de sécurité de votre navigateur. Nous recommandons l'utilisation de mots de passe forts et la mise à jour régulière de votre navigateur.

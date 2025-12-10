@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface SleepModeProps {
-  timeout?: number; // in milliseconds
+  timeout?: number; // in milliseconds (default 5 minutes)
   children: React.ReactNode;
 }
 
-export const SleepMode = ({ timeout = 600000, children }: SleepModeProps) => {
+export const SleepMode = ({ timeout = 300000, children }: SleepModeProps) => {
   const [isSleeping, setIsSleeping] = useState(false);
   const [lastActivity, setLastActivity] = useState(Date.now());
 
@@ -25,7 +25,7 @@ export const SleepMode = ({ timeout = 600000, children }: SleepModeProps) => {
       if (Date.now() - lastActivity > timeout) {
         setIsSleeping(true);
       }
-    }, 10000);
+    }, 5000);
 
     return () => {
       events.forEach(event => window.removeEventListener(event, handleActivity));
@@ -42,119 +42,213 @@ export const SleepMode = ({ timeout = 600000, children }: SleepModeProps) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[9999] bg-cyber-dark flex items-center justify-center cursor-pointer"
+            transition={{ duration: 1.5 }}
+            className="fixed inset-0 z-[9999] bg-black flex items-center justify-center cursor-pointer overflow-hidden"
             onClick={() => setIsSleeping(false)}
           >
-            <div className="relative">
-              {/* Breathing Core */}
+            {/* Deep Space Background with Stars */}
+            <div className="absolute inset-0">
+              {/* Static stars */}
+              {[...Array(200)].map((_, i) => (
+                <motion.div
+                  key={`star-${i}`}
+                  className="absolute rounded-full bg-white"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    width: `${0.5 + Math.random() * 2}px`,
+                    height: `${0.5 + Math.random() * 2}px`,
+                  }}
+                  animate={{
+                    opacity: [0.3, 0.8, 0.3],
+                    scale: [1, 1.2, 1],
+                  }}
+                  transition={{
+                    duration: 2 + Math.random() * 3,
+                    repeat: Infinity,
+                    delay: Math.random() * 3,
+                  }}
+                />
+              ))}
+              
+              {/* Nebula effect */}
               <motion.div
-                className="w-40 h-40 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center"
+                className="absolute inset-0 opacity-20"
+                style={{
+                  background: 'radial-gradient(ellipse at 30% 20%, rgba(0, 100, 255, 0.3) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(180, 0, 255, 0.2) 0%, transparent 50%)',
+                }}
+                animate={{
+                  opacity: [0.15, 0.25, 0.15],
+                }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            </div>
+
+            {/* NASA-style Realistic Earth */}
+            <div className="relative flex items-center justify-center">
+              {/* Earth Glow */}
+              <motion.div
+                className="absolute w-72 h-72 rounded-full"
+                style={{
+                  background: 'radial-gradient(circle, rgba(0, 150, 255, 0.4) 0%, rgba(0, 100, 200, 0.1) 50%, transparent 70%)',
+                  filter: 'blur(20px)',
+                }}
                 animate={{
                   scale: [1, 1.1, 1],
-                  boxShadow: [
-                    "0 0 60px rgba(0, 212, 255, 0.3)",
-                    "0 0 100px rgba(0, 212, 255, 0.5)",
-                    "0 0 60px rgba(0, 212, 255, 0.3)"
-                  ]
+                  opacity: [0.5, 0.8, 0.5],
                 }}
                 transition={{
                   duration: 4,
                   repeat: Infinity,
-                  ease: "easeInOut"
+                  ease: "easeInOut",
+                }}
+              />
+              
+              {/* Earth Sphere */}
+              <motion.div
+                className="relative w-56 h-56 rounded-full overflow-hidden"
+                style={{
+                  background: 'linear-gradient(135deg, #1a4d7c 0%, #0a2540 40%, #051525 100%)',
+                  boxShadow: 'inset -30px -20px 50px rgba(0,0,0,0.8), inset 20px 20px 40px rgba(100,180,255,0.1), 0 0 60px rgba(0,150,255,0.3)',
+                }}
+                animate={{
+                  rotateY: [0, 360],
+                }}
+                transition={{
+                  duration: 60,
+                  repeat: Infinity,
+                  ease: "linear",
                 }}
               >
+                {/* Continents Layer */}
+                <div 
+                  className="absolute inset-0 rounded-full opacity-70"
+                  style={{
+                    background: `
+                      radial-gradient(ellipse 30% 40% at 25% 35%, rgba(34,139,34,0.8) 0%, transparent 70%),
+                      radial-gradient(ellipse 20% 15% at 45% 45%, rgba(34,139,34,0.6) 0%, transparent 70%),
+                      radial-gradient(ellipse 25% 30% at 70% 55%, rgba(34,139,34,0.7) 0%, transparent 70%),
+                      radial-gradient(ellipse 15% 20% at 80% 30%, rgba(34,139,34,0.5) 0%, transparent 70%),
+                      radial-gradient(ellipse 35% 25% at 35% 70%, rgba(194,178,128,0.6) 0%, transparent 70%)
+                    `,
+                  }}
+                />
+                
+                {/* Cloud Layer */}
                 <motion.div
-                  className="w-24 h-24 rounded-full bg-gradient-to-br from-primary/50 to-accent/50"
+                  className="absolute inset-0 rounded-full opacity-30"
+                  style={{
+                    background: `
+                      radial-gradient(ellipse 20% 10% at 30% 25%, rgba(255,255,255,0.8) 0%, transparent 70%),
+                      radial-gradient(ellipse 15% 8% at 60% 35%, rgba(255,255,255,0.6) 0%, transparent 70%),
+                      radial-gradient(ellipse 25% 12% at 45% 65%, rgba(255,255,255,0.7) 0%, transparent 70%),
+                      radial-gradient(ellipse 18% 10% at 75% 50%, rgba(255,255,255,0.5) 0%, transparent 70%)
+                    `,
+                  }}
                   animate={{
-                    scale: [1, 1.15, 1],
+                    rotateZ: [0, 5, -5, 0],
                   }}
                   transition={{
-                    duration: 4,
+                    duration: 20,
                     repeat: Infinity,
                     ease: "easeInOut",
-                    delay: 0.5
                   }}
-                >
-                  <motion.div
-                    className="w-full h-full rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center"
-                    animate={{
-                      scale: [0.8, 1, 0.8],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 1
-                    }}
-                  >
-                    <span className="text-4xl">🧠</span>
-                  </motion.div>
-                </motion.div>
+                />
+                
+                {/* Atmosphere Rim */}
+                <div 
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background: 'radial-gradient(circle at 30% 30%, transparent 55%, rgba(100,180,255,0.3) 80%, rgba(0,150,255,0.1) 100%)',
+                  }}
+                />
+                
+                {/* City Lights (night side) */}
+                <div 
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background: 'radial-gradient(circle at 75% 50%, rgba(255,200,100,0.1) 0%, transparent 30%)',
+                  }}
+                />
               </motion.div>
 
               {/* Orbiting Particles */}
-              {[...Array(6)].map((_, i) => (
+              {[...Array(8)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="absolute w-3 h-3 rounded-full"
+                  className="absolute w-2 h-2 rounded-full"
                   style={{
-                    background: i % 2 === 0 ? '#00d4ff' : '#ff00ea',
-                    top: '50%',
-                    left: '50%',
+                    background: i % 2 === 0 ? '#00d4ff' : '#b400ff',
+                    boxShadow: `0 0 10px ${i % 2 === 0 ? '#00d4ff' : '#b400ff'}`,
                   }}
                   animate={{
-                    x: [
-                      Math.cos((i * 60 * Math.PI) / 180) * 100,
-                      Math.cos(((i * 60 + 360) * Math.PI) / 180) * 100
-                    ],
-                    y: [
-                      Math.sin((i * 60 * Math.PI) / 180) * 100,
-                      Math.sin(((i * 60 + 360) * Math.PI) / 180) * 100
-                    ],
-                    opacity: [0.3, 1, 0.3]
+                    rotate: [0, 360],
                   }}
                   transition={{
-                    duration: 8,
+                    duration: 10 + i * 2,
                     repeat: Infinity,
                     ease: "linear",
-                    delay: i * 0.5
+                  }}
+                  style={{
+                    transform: `rotate(${i * 45}deg) translateX(${160 + i * 15}px)`,
                   }}
                 />
               ))}
+            </div>
 
-              {/* Text */}
-              <motion.div
-                className="absolute -bottom-20 left-1/2 -translate-x-1/2 text-center"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                <p className="font-orbitron text-primary text-xl mb-2">NEOCORE AI</p>
-                <p className="text-muted-foreground text-sm">Mode veille • Bougez pour réveiller</p>
-              </motion.div>
-
-              {/* Background Particles */}
-              <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                {[...Array(30)].map((_, i) => (
+            {/* AI Consciousness Indicator */}
+            <motion.div
+              className="absolute bottom-32 left-1/2 -translate-x-1/2 text-center"
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <div className="flex items-center justify-center gap-2 mb-3">
+                {[...Array(5)].map((_, i) => (
                   <motion.div
-                    key={`bg-${i}`}
-                    className="absolute w-1 h-1 rounded-full bg-primary/30"
-                    style={{
-                      left: `${Math.random() * 100}%`,
-                      top: `${Math.random() * 100}%`,
-                    }}
+                    key={i}
+                    className="w-1 bg-primary rounded-full"
                     animate={{
-                      opacity: [0, 1, 0],
-                      scale: [0, 1, 0],
+                      height: [8, 20 + Math.random() * 20, 8],
                     }}
                     transition={{
-                      duration: 2 + Math.random() * 3,
+                      duration: 1,
                       repeat: Infinity,
-                      delay: Math.random() * 5
+                      delay: i * 0.15,
+                      ease: "easeInOut",
                     }}
                   />
                 ))}
               </div>
-            </div>
+              <p className="font-orbitron text-primary text-xl mb-2 text-glow">NEOCORE AI</p>
+              <p className="text-muted-foreground text-sm">Conscience active • Bougez pour réveiller</p>
+            </motion.div>
+
+            {/* Shooting Stars */}
+            {[...Array(3)].map((_, i) => (
+              <motion.div
+                key={`shooting-${i}`}
+                className="absolute w-20 h-0.5 bg-gradient-to-r from-white to-transparent rounded-full"
+                style={{
+                  top: `${10 + i * 25}%`,
+                  left: '-10%',
+                  transform: 'rotate(-15deg)',
+                }}
+                animate={{
+                  x: ['0vw', '120vw'],
+                  opacity: [0, 1, 1, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: i * 5 + Math.random() * 3,
+                  repeatDelay: 8,
+                }}
+              />
+            ))}
           </motion.div>
         )}
       </AnimatePresence>
