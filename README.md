@@ -1,73 +1,252 @@
-# Welcome to your Lovable project
+🌟 NEOCORE AI — HISTORIQUE DES MISES À JOUR (CHRONOLOGIQUE)
 
-## Project info
+(Simplifié, stylé, clair, avec emojis)
 
-**URL**: https://lovable.dev/projects/c8d5347d-3e91-4887-a52d-f31442bc0c7a
+🟣 V1.0 – Cyberpunk Update
 
-## How can I edit this code?
+🎨 Thèmes personnalisables
 
-There are several ways of editing your application.
+Bleu 🔵, rose 🌸, vert 🟢, orange 🟧, violet 💜
 
-**Use Lovable**
+🌌 Background animé
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/c8d5347d-3e91-4887-a52d-f31442bc0c7a) and start prompting.
+Hologrammes, pulsations lumineuses, ambiance futuriste vivante
 
-Changes made via Lovable will be committed automatically to this repo.
+💻 Terminal futuriste
 
-**Use your preferred IDE**
+Prédictions et scanlines visuelles
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Feedback dynamique façon Ghost in the Shell
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+💬 Cyberpunk Chat sécurisé
 
-Follow these steps:
+Discussion cryptée via lien privé
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Style Matrix / Signal 👽
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+🕹️ Mini-jeux intégrés
 
-# Step 3: Install the necessary dependencies.
-npm i
+Snake Cyberpunk Edition 🐍
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+Escape Ghost Protocol 👻
 
-**Edit a file directly in GitHub**
+🗺️ Calendrier, cartes et horloges
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Fusion entre Terre et univers intergalactique
 
-**Use GitHub Codespaces**
+📚 NeoPedia AI (première version)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Wiki du futur, technologies avancées et vaisseaux stellaires
 
-## What technologies are used for this project?
+➡️ Première étape solide : une plateforme cyberpunk immersive.
 
-This project is built with:
+🟡 V2.0 – Intergalactic Update 🌌
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+🐍 Jeux améliorés
 
-## How can I deploy this project?
+Snake futuriste fluide
 
-Simply open [Lovable](https://lovable.dev/projects/c8d5347d-3e91-4887-a52d-f31442bc0c7a) and click on Share -> Publish.
+Ghost Evasion debug complet
 
-## Can I connect a custom domain to my Lovable project?
+Nouveaux jeux : Space Chess ♟️ et Intergalactic Slither.io 🌠
 
-Yes, you can!
+💻 Terminal avancé
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Nouveaux profils
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Plus de commandes système
+
+Statut neural amélioré
+
+🕰️ Horloges planétaires
+
+Simulation temporelle sur 5 planètes
+
+Calendrier intergalactique
+
+🎵 Streaming Musical
+
+Lecteur interne
+
+Intégration YouTube Music
+
+📚 Neopedia AI enrichie
+
+Plus de contenus futuristes
+
+🗺️ Carte du futur
+
+Exploration interactive 2025 → 2100
+
+💬 Chat du futur
+
+Discussion avec IA, humains ou “aliens”
+
+Décodeur de messages
+
+🕹️ Voyage temporel & immersion
+
+L’interface change selon l’époque sélectionnée
+
+➡️ NEOCORE devient une expérience complète : jeux, exploration, chat et futurisme.
+
+🔵 V2.8.6 – Major Compliance Update
+
+✨ Sécurité & légalité renforcées
+
+Suppression totale des réponses médicales/juridiques
+
+Avertissement automatique :
+⚠️ contenu spéculatif, non médical, non juridique
+
+🔘 Bouton RGPD
+
+Gestion simple des données personnelles
+
+Suppression rapide et totale des données stockées
+
+♟️ Jeu d’échecs amélioré
+
+Respect strict des règles
+
+Plus de mouvements invalides possibles
+
+🗑️ Suppression instantanée des données
+
+Nouveau bouton dédié
+
+💡 Améliorations générales
+
+Interface plus fluide
+
+Correction mineures dans les mini-jeux
+
+Modules réorganisés
+
+💜 Résumé
+NEOCORE devient plus responsable, sécurisé et professionnel.
+
+🟣 V2.9.x – Future Knowledge Update
+
+📚 NeoPedia — nouvelle génération
+
+Imaginaire, futuriste, cohérente
+
+Meilleure structure interne
+
+🧬 Médecine 2030 → 2100
+
+Frise chronologique par décennie
+
+Vision futuriste de la technologie médicale
+
+😎 Personnalités IA
+
+Cool 😎
+
+Coach 💪
+
+Friend 🤝
+
+Engineer 🤖
+
+Explications simplifiées pour un usage grand public
+
+📃 Légal + RGPD retravaillés
+
+Textes simplifiés & modernisés
+
+Cohérence totale
+
+✔️ Tout a été intégré proprement et sans confirmations inutiles.
+
+🔥 🆕 AJOUT — Nouvelle mise à jour (Celle que tu viens de demander)
+
+Version 3.0 – Total Overhaul Update
+(à placer en haut du changelog)
+
+🧠 IA comportementale améliorée
+
+Réponses sur Mike désormais nuancées
+
+Mentionne que Mike est développeur logiciel / DevOps uniquement si on le demande
+
+Pas de référence spontanée aux diplômes
+
+La technologie est toujours présentée comme positive pour l’humanité
+
+🖼️ Nouveau favicon + purge de l’ancien logo ❤️
+
+Icône Lovable supprimée
+
+Nouveau favicon cyberpunk ajouté
+
+🌍 Planète 3D améliorée
+
+Fuseaux horaires UTC
+
+Frontières mondiales détaillées
+
+Texture HD type NASA
+
+Animation satellite + vitesse terrestre
+
+Liste des lieux déplacée à droite
+
+🎵 Lecteur musical IA — FIX MAJEUR
+
+La musique sort enfin (problème audio résolu)
+
+Rap = vrai rap, Jazz = vrai jazz
+
+Génération réaliste et cohérente
+
+Bouton volume ajouté
+
+Mode Intelligent basé sur les préférences (clics invisibles comptabilisés)
+
+🌙 Mode veille revu
+
+Inactivité → 5 minutes
+
+Cinématique spatiale + Terre réaliste
+
+IA “vivante” en arrière-plan
+
+🖼️ Fond d’écran Cyberpunk — totale refonte
+
+Génération stable
+
+Application qui fonctionne vraiment
+
+Harmonisation avec l’UI
+
+Luminosité gérée pour rester lisible
+
+⚠️ RGPD — correction
+
+Suppression “fichiers uploadés (max X Go)”
+
+Tout est 100% local, aucune donnée envoyée
+
+🔄 Automatisation réaliste
+
+Animation backup, scan et historique
+
+Détection de menace simulée
+
+Interface professionnelle futuriste
+
+🐎 Mini-jeu course de chevaux
+
+Vitesse réaliste
+
+IA équitable
+
+Possibilité de perdre même en accélérant
+
+Contrôles fluidifiés
+
+🧬 Nanomédecine + médecine futuriste
+
+Ajout : thérapie génique, nanotechnologies, cyber-médecine, technologies 2100
