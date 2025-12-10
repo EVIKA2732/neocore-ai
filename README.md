@@ -225,6 +225,6 @@ Possibility of losing even when accelerating
 
 Smoother controls
 
-🧬 Nanomédecine + médecine futuriste
+🧬 Nanomedicine + futuristic medicine
 
-Ajout : thérapie génique, nanotechnologies, cyber-médecine, technologies 2100
+Addition: gene therapy, nanotechnologies, cyber-medicine, 2100 technologies
