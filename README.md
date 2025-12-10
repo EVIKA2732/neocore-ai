@@ -37,7 +37,7 @@ Merging Earth and the intergalactic universe
 Wiki of the future, advanced technologies and starships
 
 ➡️ First solid step: an immersive cyberpunk platform.
-
+_________________________________________________________________________
 🟡 V2.0 – Intergalactic Update 🌌
 
 🐍 Improved games
@@ -76,7 +76,7 @@ Message decoder
 The interface changes according to the era selected
 
 ➡️ NEOCORE becomes a complete experience: games, exploration, chat and futurism.
-
+______________________________________________________________________________________________________
 🔵 V2.8.6 – Major Compliance Update
 
 ✨ Enhanced security & legality
@@ -112,7 +112,7 @@ Reorganised modules
 
 💜 Summary
 NEOCORE is becoming more responsible, secure and professional.
-
+_________________________________________________________________________________________
 🟣 V2.9.x – Future Knowledge Update
 Imaginative, futuristic, coherent
 
@@ -143,8 +143,8 @@ Simplified & modernised texts
 Total consistency
 
 ✔️ Everything has been integrated cleanly and without unnecessary confirmations.
-
-🔥 🆕 ADDITION — New update (The one you just requested)
+_____________________________________________________________________________________________________________________
+🔥 🆕 ADDITION — New update
 
 Version 3.0 – Total Overhaul Update
 (to be placed at the top of the changelog)
