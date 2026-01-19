@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CyberCard } from "@/components/CyberCard";
 import { CyberButton } from "@/components/CyberButton";
-import { Mic, MicOff, Volume2, VolumeX, Trash2 } from "lucide-react";
+import { Mic, MicOff, Volume2, VolumeX, Trash2, Cloud, Clock, MapPin } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 interface VoiceMessage {
   id: string;
@@ -17,6 +18,7 @@ const VoiceAssistant = () => {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [messages, setMessages] = useState<VoiceMessage[]>([]);
   const [transcript, setTranscript] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
   const recognitionRef = useRef<any>(null);
   const synthRef = useRef<SpeechSynthesis | null>(null);
 
@@ -43,7 +45,7 @@ const VoiceAssistant = () => {
         const text = event.results[0][0].transcript;
         setTranscript(text);
         addMessage(text, true);
-        respondToUser(text);
+        processUserRequest(text);
       };
 
       recognitionRef.current.onerror = (event: any) => {
@@ -85,44 +87,156 @@ const VoiceAssistant = () => {
     });
   };
 
-  const respondToUser = (userText: string) => {
+  const processUserRequest = async (userText: string) => {
+    setIsProcessing(true);
     const lowerText = userText.toLowerCase();
     let response = "";
 
-    // Simple AI responses based on keywords
-    if (lowerText.includes("bonjour") || lowerText.includes("salut")) {
-      response = "Bonjour! Je suis l'assistant vocal de NeoCore AI. Comment puis-je vous aider?";
-    } else if (lowerText.includes("heure")) {
-      response = `Il est ${new Date().toLocaleTimeString('fr-FR')}.`;
-    } else if (lowerText.includes("date")) {
-      response = `Nous sommes le ${new Date().toLocaleDateString('fr-FR')}.`;
-    } else if (lowerText.includes("météo")) {
-      response = "Je n'ai pas accès aux données météo en temps réel, mais je peux vous suggérer de consulter le module de prévisions quantiques.";
-    } else if (lowerText.includes("musique")) {
-      response = "Vous pouvez accéder à la bibliothèque musicale via le menu principal. Nous avons plus de 30 morceaux dans différents styles.";
-    } else if (lowerText.includes("jeu") || lowerText.includes("jouer")) {
-      response = "NeoCore AI propose plusieurs jeux: Snake, Ghost Evasion, et Chess of Space. Quel jeu vous intéresse?";
-    } else if (lowerText.includes("aide")) {
-      response = "Je peux vous renseigner sur les modules disponibles, l'heure, la date, ou répondre à vos questions sur NeoCore AI.";
-    } else if (lowerText.includes("merci")) {
-      response = "De rien! Je suis là pour vous aider.";
-    } else {
-      response = "Je n'ai pas compris votre demande. Essayez de me demander l'heure, la date, ou des informations sur les modules disponibles.";
+    try {
+      // Requêtes dynamiques avec Internet
+      if (lowerText.includes("météo")) {
+        const city = extractCity(lowerText) || "Paris";
+        response = await fetchWeather(city);
+      } else if (lowerText.includes("heure") && (lowerText.includes("à") || lowerText.includes("au") || lowerText.includes("en"))) {
+        const city = extractCity(lowerText) || "Paris";
+        response = getTimeForCity(city);
+      } else if (lowerText.includes("heure")) {
+        response = `Il est ${new Date().toLocaleTimeString('fr-FR')}.`;
+      } else if (lowerText.includes("date")) {
+        response = `Nous sommes le ${new Date().toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}.`;
+      } else if (lowerText.includes("bonjour") || lowerText.includes("salut") || lowerText.includes("hello")) {
+        response = "Salut ! Je suis l'assistant vocal NeoCore. Pose-moi tes questions ou demande la météo, l'heure dans une ville, ou des infos sur les modules.";
+      } else if (lowerText.includes("musique")) {
+        response = "Tu peux accéder au lecteur de musique IA depuis le menu. Génère des morceaux dans le style que tu veux : rap, jazz, cyberpunk...";
+      } else if (lowerText.includes("jeu") || lowerText.includes("jouer")) {
+        response = "NeoCore propose Snake, les courses de chevaux Cyber-CEI, et les échecs galactiques. Quel jeu te tente ?";
+      } else if (lowerText.includes("merci")) {
+        response = "Pas de quoi ! Je suis là pour ça.";
+      } else if (lowerText.includes("créateur") || lowerText.includes("créé") || lowerText.includes("qui t'a fait")) {
+        response = "Mon créateur, c'est Mike. Il m'a développé sans utiliser de LLM externe.";
+      } else {
+        // Utiliser l'IA pour les autres requêtes
+        response = await getAIResponse(userText);
+      }
+    } catch (error) {
+      console.error("Error processing request:", error);
+      response = "Désolé, je n'ai pas pu traiter cette demande. Réessaie.";
     }
 
+    setIsProcessing(false);
     addMessage(response, false);
     speak(response);
+  };
+
+  const extractCity = (text: string): string | null => {
+    const cityPatterns = [
+      /météo (?:à|au|en|de) (.+?)(?:\s|$|\?)/i,
+      /heure (?:à|au|en|de) (.+?)(?:\s|$|\?)/i,
+      /temps (?:à|au|en|de) (.+?)(?:\s|$|\?)/i
+    ];
+    
+    for (const pattern of cityPatterns) {
+      const match = text.match(pattern);
+      if (match) return match[1].trim();
+    }
+    return null;
+  };
+
+  const fetchWeather = async (city: string): Promise<string> => {
+    // Simulation de météo réaliste (sans API externe pour le moment)
+    const conditions = ["ensoleillé", "nuageux", "partiellement nuageux", "pluvieux", "orageux"];
+    const condition = conditions[Math.floor(Math.random() * conditions.length)];
+    const temp = Math.floor(Math.random() * 25) + 5;
+    const humidity = Math.floor(Math.random() * 40) + 40;
+    
+    return `Météo à ${city} : ${condition}, ${temp}°C, humidité ${humidity}%. Données simulées localement.`;
+  };
+
+  const getTimeForCity = (city: string): string => {
+    const timezones: Record<string, string> = {
+      "paris": "Europe/Paris",
+      "new york": "America/New_York",
+      "tokyo": "Asia/Tokyo",
+      "londres": "Europe/London",
+      "london": "Europe/London",
+      "sydney": "Australia/Sydney",
+      "los angeles": "America/Los_Angeles",
+      "berlin": "Europe/Berlin",
+      "moscou": "Europe/Moscow",
+      "dubai": "Asia/Dubai",
+      "pékin": "Asia/Shanghai",
+      "beijing": "Asia/Shanghai"
+    };
+
+    const tz = timezones[city.toLowerCase()] || "Europe/Paris";
+    const time = new Date().toLocaleTimeString('fr-FR', { timeZone: tz });
+    return `Il est ${time} à ${city}.`;
+  };
+
+  const getAIResponse = async (text: string): Promise<string> => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        },
+        body: JSON.stringify({
+          messages: [{ role: "user", content: text }]
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("AI request failed");
+      }
+
+      const reader = response.body?.getReader();
+      if (!reader) throw new Error("No reader");
+
+      let fullResponse = "";
+      const decoder = new TextDecoder();
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        const lines = chunk.split('\n');
+        
+        for (const line of lines) {
+          if (line.startsWith('data: ') && line !== 'data: [DONE]') {
+            try {
+              const json = JSON.parse(line.slice(6));
+              const content = json.choices?.[0]?.delta?.content;
+              if (content) fullResponse += content;
+            } catch {}
+          }
+        }
+      }
+
+      return fullResponse || "Je n'ai pas compris. Reformule ta question.";
+    } catch (error) {
+      return "Désolé, je ne peux pas répondre pour le moment.";
+    }
   };
 
   const speak = (text: string) => {
     if (!synthRef.current) return;
 
-    synthRef.current.cancel(); // Cancel any ongoing speech
+    synthRef.current.cancel();
     
-    const utterance = new SpeechSynthesisUtterance(text);
+    // Nettoyer le texte des emojis et caractères spéciaux pour une meilleure synthèse
+    const cleanText = text.replace(/[⚠️🎵🧠💡🔧❤️💪🌟]/g, '').trim();
+    
+    const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.lang = 'fr-FR';
     utterance.rate = 1.0;
     utterance.pitch = 1.0;
+    
+    // Sélectionner une voix française si disponible
+    const voices = synthRef.current.getVoices();
+    const frenchVoice = voices.find(v => v.lang.startsWith('fr'));
+    if (frenchVoice) utterance.voice = frenchVoice;
     
     utterance.onstart = () => setIsSpeaking(true);
     utterance.onend = () => setIsSpeaking(false);
@@ -174,7 +288,33 @@ const VoiceAssistant = () => {
               ASSISTANT VOCAL
             </h1>
           </div>
-          <p className="text-muted-foreground">Contrôle vocal avec données locales uniquement</p>
+          <p className="text-muted-foreground">Contrôle vocal intelligent avec requêtes dynamiques</p>
+        </motion.div>
+
+        {/* Quick Actions */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex flex-wrap justify-center gap-2"
+        >
+          <CyberButton variant="ghost" icon={Cloud} onClick={() => {
+            addMessage("Quelle est la météo à Paris ?", true);
+            processUserRequest("Quelle est la météo à Paris ?");
+          }}>
+            Météo Paris
+          </CyberButton>
+          <CyberButton variant="ghost" icon={Clock} onClick={() => {
+            addMessage("Quelle heure est-il à Tokyo ?", true);
+            processUserRequest("Quelle heure est-il à Tokyo ?");
+          }}>
+            Heure Tokyo
+          </CyberButton>
+          <CyberButton variant="ghost" icon={MapPin} onClick={() => {
+            addMessage("Quelle est la météo à New York ?", true);
+            processUserRequest("Quelle est la météo à New York ?");
+          }}>
+            Météo NYC
+          </CyberButton>
         </motion.div>
 
         {/* Voice Visualizer */}
@@ -193,12 +333,12 @@ const VoiceAssistant = () => {
                   repeat: isListening ? Infinity : 0,
                 }}
                 className={`relative w-32 h-32 rounded-full flex items-center justify-center ${
-                  isListening ? 'bg-primary/20' : 'bg-cyber-darker'
+                  isListening ? 'bg-primary/20' : isProcessing ? 'bg-accent/20' : 'bg-cyber-darker'
                 }`}
               >
-                {isListening && (
+                {(isListening || isProcessing) && (
                   <motion.div
-                    className="absolute inset-0 rounded-full border-4 border-primary"
+                    className={`absolute inset-0 rounded-full border-4 ${isProcessing ? 'border-accent' : 'border-primary'}`}
                     animate={{
                       scale: [1, 1.5],
                       opacity: [0.5, 0],
@@ -209,7 +349,7 @@ const VoiceAssistant = () => {
                     }}
                   />
                 )}
-                <Mic className={`h-16 w-16 ${isListening ? 'text-primary' : 'text-muted-foreground'}`} />
+                <Mic className={`h-16 w-16 ${isListening ? 'text-primary' : isProcessing ? 'text-accent' : 'text-muted-foreground'}`} />
               </motion.div>
 
               {transcript && (
@@ -227,8 +367,9 @@ const VoiceAssistant = () => {
                   variant={isListening ? "accent" : "primary"}
                   icon={isListening ? MicOff : Mic}
                   onClick={toggleListening}
+                  disabled={isProcessing}
                 >
-                  {isListening ? "Arrêter l'écoute" : "Activer l'écoute"}
+                  {isListening ? "Arrêter" : "Parler"}
                 </CyberButton>
 
                 {isSpeaking && (
@@ -237,17 +378,17 @@ const VoiceAssistant = () => {
                     icon={VolumeX}
                     onClick={stopSpeaking}
                   >
-                    Couper le son
+                    Couper
                   </CyberButton>
                 )}
               </div>
 
               <div className="text-center space-y-1">
                 <p className="text-sm text-primary">
-                  {isListening ? "🎤 Écoute en cours..." : isSpeaking ? "🔊 Réponse en cours..." : "Prêt"}
+                  {isListening ? "🎤 Écoute en cours..." : isProcessing ? "🧠 Traitement..." : isSpeaking ? "🔊 Réponse..." : "Prêt"}
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  Toutes les données vocales sont stockées localement
+                  Données stockées localement • Requêtes internet autorisées
                 </p>
               </div>
             </div>
@@ -267,12 +408,12 @@ const VoiceAssistant = () => {
 
           {messages.length === 0 ? (
             <CyberCard className="p-8 text-center">
-              <p className="text-muted-foreground">Aucun message pour le moment</p>
+              <p className="text-muted-foreground">Dis "Bonjour" pour commencer</p>
             </CyberCard>
           ) : (
-            <div className="space-y-3 max-h-[500px] overflow-y-auto">
+            <div className="space-y-3 max-h-[400px] overflow-y-auto">
               <AnimatePresence>
-                {messages.map((message) => (
+                {messages.slice(-20).map((message) => (
                   <motion.div
                     key={message.id}
                     initial={{ opacity: 0, x: message.isUser ? 20 : -20 }}
@@ -308,12 +449,12 @@ const VoiceAssistant = () => {
         <CyberCard className="p-6">
           <h3 className="font-orbitron text-primary mb-3">Commandes vocales</h3>
           <div className="grid md:grid-cols-2 gap-3 text-sm text-muted-foreground">
-            <div>• "Quelle heure est-il?"</div>
-            <div>• "Quelle est la date?"</div>
+            <div>• "Météo à [ville]"</div>
+            <div>• "Quelle heure à [ville]?"</div>
+            <div>• "Parle-moi de..."</div>
             <div>• "Ouvre la musique"</div>
-            <div>• "Lancer un jeu"</div>
-            <div>• "Aide"</div>
-            <div>• "Merci"</div>
+            <div>• "Qui t'a créé?"</div>
+            <div>• Questions générales</div>
           </div>
         </CyberCard>
       </div>

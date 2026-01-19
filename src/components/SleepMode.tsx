@@ -184,6 +184,11 @@ export const SleepMode = ({ timeout = 300000, children }: SleepModeProps) => {
                   style={{
                     background: i % 2 === 0 ? '#00d4ff' : '#b400ff',
                     boxShadow: `0 0 10px ${i % 2 === 0 ? '#00d4ff' : '#b400ff'}`,
+                    transformOrigin: 'center center',
+                  }}
+                  initial={{
+                    x: Math.cos((i * 45 * Math.PI) / 180) * (160 + i * 15),
+                    y: Math.sin((i * 45 * Math.PI) / 180) * (160 + i * 15),
                   }}
                   animate={{
                     rotate: [0, 360],
@@ -192,9 +197,6 @@ export const SleepMode = ({ timeout = 300000, children }: SleepModeProps) => {
                     duration: 10 + i * 2,
                     repeat: Infinity,
                     ease: "linear",
-                  }}
-                  style={{
-                    transform: `rotate(${i * 45}deg) translateX(${160 + i * 15}px)`,
                   }}
                 />
               ))}

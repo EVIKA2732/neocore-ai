@@ -7,7 +7,7 @@ export const LegalFooter = () => {
         <div className="flex items-center justify-center gap-1 text-[10px] text-muted-foreground/80">
           <AlertTriangle className="h-2.5 w-2.5 text-primary/70 flex-shrink-0" />
           <p className="text-center truncate">
-            ⚠️ Contenu spéculatif · Non médical · Non juridique
+            ⚠️ Pas de conseils médicaux · Pas de conseils juridiques · Pas de conseils financiers
           </p>
         </div>
       </div>
