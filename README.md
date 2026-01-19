@@ -1,3 +1,79 @@
+
+🚀 NeoCore AI — Major Core Repair & Evolution Update - 22nd Century 
+
+✨ Critical AI repairs
+
+🧠 Complete repair of the artificial intelligence engine
+
+⚡ Processing of all errors and inconsistencies in a single pass
+
+🔁 System now capable of handling all updates in a single cycle (without intermediate steps)
+
+⚖️ Simplification of legal notices
+
+📜 Legal notices made shorter and more readable
+
+🚫 Clear prohibition of all medical, legal and regulated professional advice
+
+🏷️ Discreet automatic banner:
+‘Speculative content — not medical — not legal — not professional’
+
+🔮 Redesign of the prediction system
+
+🔍 Predictions possible about oneself or others
+
+🧾 Systematic addition of a discreet disclaimer banner
+
+🧠 Clarification: speculative, playful, non-scientific content
+
+🎵 Repair of the music player
+
+🔊 Correction of the bug preventing any sound generation
+
+🔎 Functional music search by song name
+
+🎧 Player now capable of producing a real audio stream
+
+🗣️ Major improvement to the voice player
+
+🧠 Expanded understanding of natural sentences
+
+🔁 Removal of unnecessary repetitions
+
+🌐 Connection to online data (e.g. weather by location)
+
+🎯 More fluid, natural and contextual responses
+
+🤖 Creation of several distinct artificial intelligences
+
+🧩 Generalist main AI
+
+📚 AI based on recent and legal algorithms
+
+
+💪 AI Coach dedicated to support and guidance
+
+🎮 Mini-games & embedded intelligence
+
+🟡 Addition of improved Pacman game
+
+♟️ Interactive game against the computer with real AI opponent
+
+🧠 Dynamic responses and adaptive behaviour from the computer
+
+🌐 Interface & visual identity
+
+❌ Removal of the heart logo (OVB)
+
+⚡ New cyberpunk favicon in the browser tab
+
+🖥️ Visual identity aligned with the futuristic universe
+
+
+Translated with DeepL.com (free version)
+_________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+
 🌟 NEOCORE AI — UPDATE HISTORY (CHRONOLOGICAL HERE 22nd Century)
 
 🟣 V1.0 – Cyberpunk Update
